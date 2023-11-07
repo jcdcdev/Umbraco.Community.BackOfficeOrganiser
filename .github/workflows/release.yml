@@ -1,0 +1,20 @@
+on:
+  pull_request:
+    branches: "*"
+    types: [closed]
+  workflow_dispatch:
+jobs:
+  call-workflow-passing-data:
+    uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/reusable-workflow.yml@main
+    with:
+      config-path: .github/labeler.yml
+      project_name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
+      artifact_name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
+      project_path: './src/jcdcdev.Umbraco.BackOfficeOrganiser/jcdcdev.Umbraco.BackOfficeOrganiser.csproj'
+      npm_enabled: true
+      npm_working_dir: './src/jcdcdev.Umbraco.BackOfficeOrganiser.Client/'
+      npm_run_command: 'build'
+      deploy: true
+    secrets:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
