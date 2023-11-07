@@ -11,7 +11,6 @@ jobs:
     uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/build-release-template.yml@main
     with:
       project-name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
-      artifact-name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
       project-path: './src/jcdcdev.Umbraco.BackOfficeOrganiser/jcdcdev.Umbraco.BackOfficeOrganiser.csproj'
       npm-enabled: true
       npm-working-dir: './src/jcdcdev.Umbraco.BackOfficeOrganiser.Client/'
