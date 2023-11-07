@@ -8,7 +8,7 @@ jobs:
   build_release:
     permissions:
       contents: write
-    uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/reusable-workflow.yml@main
+    uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/build-release-template.yml@main
     with:
       project-name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
       artifact-name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
