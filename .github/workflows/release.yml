@@ -5,7 +5,7 @@ on:
     types: [closed]
   workflow_dispatch:
 jobs:
-  call-workflow-passing-data:
+  build_release:
     permissions:
       contents: write
     uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/reusable-workflow.yml@main

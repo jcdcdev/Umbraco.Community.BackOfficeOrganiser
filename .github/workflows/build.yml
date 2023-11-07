@@ -4,7 +4,9 @@ on:
     branches: "*"
   workflow_dispatch:
 jobs:
-  call-workflow-passing-data:
+  build:
+    permissions:
+      contents: write
     uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/build-release-template.yml@main
     with:
       project_name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
