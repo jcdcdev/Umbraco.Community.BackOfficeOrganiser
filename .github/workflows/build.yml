@@ -9,11 +9,11 @@ jobs:
       contents: write
     uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/build-release-template.yml@main
     with:
-      project_name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
-      project_path: './src/jcdcdev.Umbraco.BackOfficeOrganiser/jcdcdev.Umbraco.BackOfficeOrganiser.csproj'
-      npm_enabled: true
-      npm_working_dir: './src/jcdcdev.Umbraco.BackOfficeOrganiser.Client/'
-      npm_run_command: 'build'
+      project-name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
+      project-path: './src/jcdcdev.Umbraco.BackOfficeOrganiser/jcdcdev.Umbraco.BackOfficeOrganiser.csproj'
+      npm-enabled: true
+      npm-working-dir: './src/jcdcdev.Umbraco.BackOfficeOrganiser.Client/'
+      npm-run-command: 'build'
       deploy: false
     secrets:
-      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      nuget-api-key: ${{ secrets.NUGET_API_KEY }}
