@@ -6,6 +6,8 @@ on:
   workflow_dispatch:
 jobs:
   call-workflow-passing-data:
+    permissions:
+      contents: write
     uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/reusable-workflow.yml@main
     with:
       config-path: .github/labeler.yml
