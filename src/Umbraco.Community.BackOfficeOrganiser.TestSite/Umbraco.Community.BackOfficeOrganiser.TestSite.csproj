@@ -6,6 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="jcdcdev.Umbraco.Core" Version="0.2.0" />
 		<PackageReference Include="Umbraco.Cms" Version="10.6.1"/>
 		<PackageReference Include="uSync" Version="10.7.1"/>
 	</ItemGroup>

@@ -1,5 +1,4 @@
 using Umbraco.Cms.Core.Composing;
-using Umbraco.Community.BackOfficeOrganiser.Extensions;
 
 namespace Umbraco.Community.BackOfficeOrganiser.TestSite;
 

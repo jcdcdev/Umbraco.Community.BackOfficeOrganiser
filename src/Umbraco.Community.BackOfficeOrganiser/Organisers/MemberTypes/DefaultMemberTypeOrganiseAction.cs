@@ -1,7 +1,7 @@
+using jcdcdev.Umbraco.Core.Extensions;
 using StackExchange.Profiling.Internal;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
-using Umbraco.Community.BackOfficeOrganiser.Extensions;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 

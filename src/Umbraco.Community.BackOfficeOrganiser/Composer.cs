@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
-using Umbraco.Community.BackOfficeOrganiser.Extensions;
 using Umbraco.Community.BackOfficeOrganiser.Models;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
