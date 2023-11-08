@@ -1,19 +1,18 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Serilog.Core;
+using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Community.BackOfficeOrganiser.Extensions;
 using Umbraco.Community.BackOfficeOrganiser.Models;
 using Umbraco.Extensions;
-using Constants = Umbraco.Cms.Core.Constants;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 
 public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
 {
-    private readonly BackOfficeOrganiserOptions _options;
     private readonly ILogger _logger;
+    private readonly BackOfficeOrganiserOptions _options;
 
     public DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> options, ILogger<DefaultDataTypeOrganiseAction> logger)
     {
