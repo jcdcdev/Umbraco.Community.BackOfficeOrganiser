@@ -1,18 +1,23 @@
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Umbraco.Cms.Core;
+using Serilog.Core;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Community.BackOfficeOrganiser.Extensions;
 using Umbraco.Community.BackOfficeOrganiser.Models;
+using Umbraco.Extensions;
+using Constants = Umbraco.Cms.Core.Constants;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 
 public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
 {
     private readonly BackOfficeOrganiserOptions _options;
+    private readonly ILogger _logger;
 
-    public DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> options)
+    public DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> options, ILogger<DefaultDataTypeOrganiseAction> logger)
     {
+        _logger = logger;
         _options = options.Value;
     }
 
@@ -20,27 +25,30 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
 
     public void Move(IDataType dataType, IDataTypeService dataTypeService)
     {
-        var parentFolderId = -1;
-
+        string internalFolder;
         if (dataType.IsInternalUmbracoEditor())
         {
-            var internalFolder = dataTypeService.GetOrCreateFolder(_options.DataTypes.InternalFolderName);
-            parentFolderId = internalFolder.Id;
+            internalFolder = _options.DataTypes.InternalFolderName;
         }
         else if (dataType.IsUmbracoEditor())
         {
-            var internalFolder = dataTypeService.GetOrCreateFolder(_options.DataTypes.CustomFolderName);
-            parentFolderId = internalFolder.Id;
+            internalFolder = _options.DataTypes.CustomFolderName;
         }
         else
         {
-            var internalFolder = dataTypeService.GetOrCreateFolder(_options.DataTypes.ThirdPartyFolderName);
-            parentFolderId = internalFolder.Id;
+            internalFolder = _options.DataTypes.ThirdPartyFolderName;
         }
 
+        var parentFolder = dataTypeService.GetOrCreateFolder(internalFolder);
         var folder = GetFolderName(dataType);
+        if (folder.IsNullOrWhiteSpace())
+        {
+            _logger.LogWarning("Failed to determine folder name. {DataType} will be considered Custom", dataType.Name);
+            dataTypeService.Move(dataType, parentFolder.Id);
+            return;
+        }
 
-        var dataTypeFolder = dataTypeService.GetOrCreateFolder(folder, parentFolderId);
+        var dataTypeFolder = dataTypeService.GetOrCreateFolder(folder, parentFolder.Id);
         dataTypeService.Move(dataType, dataTypeFolder.Id);
     }
 
