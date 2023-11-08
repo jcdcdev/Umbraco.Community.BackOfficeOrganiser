@@ -1,19 +1,19 @@
+name: Build
 on:
   pull_request:
     branches: "*"
   workflow_dispatch:
 jobs:
-  call-workflow-passing-data:
+  build:
+    permissions:
+      contents: write
     uses: jcdcdev/jcdcdev.Github.UmbracoSimpleDeploy/.github/workflows/build-release-template.yml@main
     with:
-      config-path: .github/labeler.yml
-      project_name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
-      artifact_name: 'jcdcdev.Umbraco.BackOfficeOrganiser'
-      project_path: './src/jcdcdev.Umbraco.BackOfficeOrganiser/jcdcdev.Umbraco.BackOfficeOrganiser.csproj'
-      npm_enabled: true
-      npm_working_dir: './src/jcdcdev.Umbraco.BackOfficeOrganiser.Client/'
-      npm_run_command: 'build'
+      project-name: 'Umbraco.Community.BackOfficeOrganiser'
+      project-path: './src/Umbraco.Community.BackOfficeOrganiser/Umbraco.Community.BackOfficeOrganiser.csproj'
+      npm-enabled: true
+      npm-working-dir: './src/Umbraco.Community.BackOfficeOrganiser.Client/'
+      npm-run-command: 'build'
       deploy: false
     secrets:
-      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      nuget-api-key: ${{ secrets.NUGET_API_KEY }}
