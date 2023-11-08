@@ -1,31 +1,33 @@
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core;
-using Umbraco.Cms.Core.Models;
 using Umbraco.Community.BackOfficeOrganiser.Models;
-using Umbraco.Community.BackOfficeOrganiser.Organisers;
+using Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
+using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
+using Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
+using Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
 namespace Umbraco.Community.BackOfficeOrganiser;
 
 public class BackOfficeOrganiserService : IBackOfficeOrganiserService
 {
-    private readonly IBackOfficeOrganiser<IContentType> _contentTypeOrganiser;
-    private readonly IBackOfficeOrganiser<IDataType> _dataTypeOrganiser;
+    private readonly ContentTypeOrganiser _contentTypeOrganiser;
+    private readonly DataTypeOrganiser _dataTypeOrganiser;
     private readonly ILogger _logger;
-    private readonly IBackOfficeOrganiser<IMediaType> _mediaTypeOrganiser;
-    private readonly IBackOfficeOrganiser<IMemberType> _memberTypeOrganiser;
+    private readonly MediaTypeOrganiser _mediaTypeOrganiser;
+    private readonly MemberTypeOrganiser _memberTypeOrganiser;
 
     public BackOfficeOrganiserService(
-        IBackOfficeOrganiser<IDataType> dataTypeOrganiser,
-        IBackOfficeOrganiser<IContentType> contentTypeOrganiser,
-        IBackOfficeOrganiser<IMediaType> mediaTypeOrganiser,
-        IBackOfficeOrganiser<IMemberType> memberTypeOrganiser,
-        ILogger<BackOfficeOrganiserService> logger)
+        ILogger<BackOfficeOrganiserService> logger,
+        ContentTypeOrganiser contentTypeOrganiser,
+        MediaTypeOrganiser mediaTypeOrganiser,
+        MemberTypeOrganiser memberTypeOrganiser,
+        DataTypeOrganiser dataTypeOrganiser)
     {
-        _dataTypeOrganiser = dataTypeOrganiser;
+        _logger = logger;
         _contentTypeOrganiser = contentTypeOrganiser;
         _mediaTypeOrganiser = mediaTypeOrganiser;
         _memberTypeOrganiser = memberTypeOrganiser;
-        _logger = logger;
+        _dataTypeOrganiser = dataTypeOrganiser;
     }
 
     public Attempt<OrganiseType> Organise(OrganiseType organise)

@@ -1,10 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
-using Umbraco.Cms.Core.Models;
 using Umbraco.Community.BackOfficeOrganiser.Extensions;
 using Umbraco.Community.BackOfficeOrganiser.Models;
-using Umbraco.Community.BackOfficeOrganiser.Organisers;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
@@ -21,10 +19,10 @@ public class Composer : IComposer
 
         builder.Services.AddSingleton<IBackOfficeOrganiserService, BackOfficeOrganiserService>();
 
-        builder.Services.AddSingleton<IBackOfficeOrganiser<IDataType>, DataTypeOrganiser>();
-        builder.Services.AddSingleton<IBackOfficeOrganiser<IContentType>, ContentTypeOrganiser>();
-        builder.Services.AddSingleton<IBackOfficeOrganiser<IMemberType>, MemberTypeOrganiser>();
-        builder.Services.AddSingleton<IBackOfficeOrganiser<IMediaType>, MediaTypeOrganiser>();
+        builder.Services.AddSingleton<DataTypeOrganiser>();
+        builder.Services.AddSingleton<ContentTypeOrganiser>();
+        builder.Services.AddSingleton<MemberTypeOrganiser>();
+        builder.Services.AddSingleton<MediaTypeOrganiser>();
 
         builder.ManifestFilters().Append<ManifestFilter>();
 

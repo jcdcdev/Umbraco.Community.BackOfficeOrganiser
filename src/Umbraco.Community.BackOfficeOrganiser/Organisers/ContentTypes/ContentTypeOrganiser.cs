@@ -11,7 +11,7 @@ public class ContentTypeOrganiser : BackOfficeOrganiserBase<IContentType>
     private readonly ContentTypeOrganiseActionCollection _organiseActions;
 
     public ContentTypeOrganiser(
-        ILogger logger,
+        ILogger<ContentTypeOrganiser> logger,
         IContentTypeService contentTypeService,
         ContentTypeOrganiseActionCollection organiseActions) : base(logger)
     {
