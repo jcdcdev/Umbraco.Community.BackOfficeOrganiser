@@ -6,7 +6,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Articulate" Version="5.0.1"/>
 		<PackageReference Include="Umbraco.Cms" Version="10.6.1"/>
 		<PackageReference Include="uSync" Version="10.7.1"/>
 	</ItemGroup>
