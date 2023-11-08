@@ -1,4 +1,3 @@
-using Umbraco.Community.BackOfficeOrganiser.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Web.BackOffice.Filters;
@@ -6,6 +5,7 @@ using Umbraco.Cms.Web.Common.Attributes;
 using Umbraco.Cms.Web.Common.Authorization;
 using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Cms.Web.Common.Filters;
+using Umbraco.Community.BackOfficeOrganiser.Models;
 
 namespace Umbraco.Community.BackOfficeOrganiser;
 
@@ -16,10 +16,18 @@ namespace Umbraco.Community.BackOfficeOrganiser;
 [UmbracoRequireHttps]
 public class BackOfficeOrganiserController : UmbracoApiController
 {
+    private readonly IBackOfficeOrganiserService _service;
+
+    public BackOfficeOrganiserController(IBackOfficeOrganiserService service)
+    {
+        _service = service;
+    }
+
     public IActionResult Organise(string type)
     {
         var organiseType = DetermineOrganiseType(type);
         var attempt = _service.Organise(organiseType);
+
         if (!attempt.Success)
         {
             return BadRequest(OrganiseResponse.Fail($"Failed to organise {type}"));
@@ -40,12 +48,5 @@ public class BackOfficeOrganiserController : UmbracoApiController
             _ => OrganiseType.Unknown
         };
         return organise;
-    }
-
-    private readonly IBackOfficeOrganiserService _service;
-
-    public BackOfficeOrganiserController(IBackOfficeOrganiserService service)
-    {
-        _service = service;
     }
 }

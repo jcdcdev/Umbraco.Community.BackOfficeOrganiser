@@ -1,5 +1,5 @@
-using Umbraco.Community.BackOfficeOrganiser.Models;
 using Umbraco.Cms.Core;
+using Umbraco.Community.BackOfficeOrganiser.Models;
 
 namespace Umbraco.Community.BackOfficeOrganiser;
 

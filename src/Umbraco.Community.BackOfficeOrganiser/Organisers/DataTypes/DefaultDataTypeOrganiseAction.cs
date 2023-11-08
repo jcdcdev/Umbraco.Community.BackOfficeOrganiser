@@ -1,9 +1,9 @@
-using Umbraco.Community.BackOfficeOrganiser.Extensions;
-using Umbraco.Community.BackOfficeOrganiser.Models;
 using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Community.BackOfficeOrganiser.Extensions;
+using Umbraco.Community.BackOfficeOrganiser.Models;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 
@@ -21,6 +21,7 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
     public void Move(IDataType dataType, IDataTypeService dataTypeService)
     {
         var parentFolderId = -1;
+
         if (dataType.IsInternalUmbracoEditor())
         {
             var internalFolder = dataTypeService.GetOrCreateFolder(_options.DataTypes.InternalFolderName);
@@ -54,7 +55,7 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
         var folder = dataType.EditorAlias switch
         {
             Constants.PropertyEditors.Aliases.BlockList => "Block List",
-            
+
             Constants.PropertyEditors.Aliases.NestedContent => "Nested Content",
 
             Constants.PropertyEditors.Aliases.Grid => "Grid",

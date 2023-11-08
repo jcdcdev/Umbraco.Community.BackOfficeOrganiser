@@ -6,17 +6,18 @@ namespace Umbraco.Community.BackOfficeOrganiser.Extensions;
 
 public static class DataTypeServiceExtensions
 {
-    public static IEnumerable<EntityContainer> GetAllContainers(this IDataTypeService dataTypeService) =>
-        dataTypeService.GetContainers(Array.Empty<int>());
+    public static IEnumerable<EntityContainer> GetAllContainers(this IDataTypeService dataTypeService) => dataTypeService.GetContainers(Array.Empty<int>());
 
     public static void DeleteAllEmptyContainers(this IDataTypeService dataTypeService)
     {
         var dataTypes = dataTypeService.GetAll();
         var lookup = dataTypes.GroupBy(x => x.ParentId).ToLookup(x => x.Key, x => x.Count());
         var containers = dataTypeService.GetAllContainers();
+
         foreach (var container in containers)
         {
             var hasChildren = lookup.Contains(container.Id);
+
             if (hasChildren)
             {
                 continue;
@@ -26,7 +27,9 @@ public static class DataTypeServiceExtensions
         }
     }
 
-    public static EntityContainer GetOrCreateFolder(this IDataTypeService dataTypeService, string folder,
+    public static EntityContainer GetOrCreateFolder(
+        this IDataTypeService dataTypeService,
+        string folder,
         int parentId = -1)
     {
         var dts = dataTypeService

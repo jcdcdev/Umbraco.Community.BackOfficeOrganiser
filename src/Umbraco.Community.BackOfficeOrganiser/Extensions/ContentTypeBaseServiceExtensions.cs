@@ -14,9 +14,11 @@ public static class ContentTypeBaseServiceExtensions
         var contentTypes = service.GetAll();
         var lookup = contentTypes.GroupBy(x => x.ParentId).ToLookup(x => x.Key, x => x.Count());
         var containers = service.GetAllContainers();
+
         foreach (var container in containers)
         {
             var hasChildren = lookup.Contains(container.Id);
+
             if (hasChildren)
             {
                 continue;

@@ -21,8 +21,5 @@ public static class MediaTypeExtensions
         Constants.Conventions.MediaTypes.VectorGraphicsAlias
     };
 
-    public static bool IsInternal(this IMediaType mediaType)
-    {
-        return MediaTypes.InvariantContains(mediaType.Alias);
-    }
+    public static bool IsInternal(this IMediaType mediaType) => MediaTypes.InvariantContains(mediaType.Alias);
 }

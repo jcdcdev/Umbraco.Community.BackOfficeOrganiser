@@ -45,7 +45,7 @@ public static class DataTypeExtensions
         Constants.DataTypes.Guids.LabelBigIntGuid,
         Constants.DataTypes.Guids.LabelDateTimeGuid,
         Constants.DataTypes.Guids.LabelTimeGuid,
-        Constants.DataTypes.Guids.LabelDecimalGuid,
+        Constants.DataTypes.Guids.LabelDecimalGuid
     };
 
     private static readonly string[] Aliases =
@@ -83,12 +83,10 @@ public static class DataTypeExtensions
         Constants.PropertyEditors.Aliases.UploadField,
         Constants.PropertyEditors.Aliases.EmailAddress,
         Constants.PropertyEditors.Aliases.NestedContent,
-        Constants.PropertyEditors.Aliases.MultiUrlPicker,
+        Constants.PropertyEditors.Aliases.MultiUrlPicker
     };
 
-    public static bool IsUmbracoEditor(this IDataType dataType) =>
-        Aliases.InvariantContains(dataType.EditorAlias);
+    public static bool IsUmbracoEditor(this IDataType dataType) => Aliases.InvariantContains(dataType.EditorAlias);
 
-    public static bool IsInternalUmbracoEditor(this IDataType dataType) =>
-        Guids.Contains(dataType.Key);
+    public static bool IsInternalUmbracoEditor(this IDataType dataType) => Guids.Contains(dataType.Key);
 }

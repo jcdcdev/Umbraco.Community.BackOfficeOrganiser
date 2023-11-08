@@ -2,16 +2,6 @@ namespace Umbraco.Community.BackOfficeOrganiser.Models;
 
 public class OrganiseResponse
 {
-    public static OrganiseResponse Success(string? message = null)
-    {
-        return new OrganiseResponse(message, true);
-    }
-
-    public static OrganiseResponse Fail(string? message = null)
-    {
-        return new OrganiseResponse(message, false);
-    }
-
     private OrganiseResponse(string? message, bool success)
     {
         Message = message ?? string.Empty;
@@ -21,4 +11,8 @@ public class OrganiseResponse
     public bool Error { get; }
 
     public string Message { get; }
+
+    public static OrganiseResponse Success(string? message = null) => new(message, true);
+
+    public static OrganiseResponse Fail(string? message = null) => new(message, false);
 }
