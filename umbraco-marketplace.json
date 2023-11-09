@@ -7,7 +7,7 @@
     "ImageUrl": "https://github.com/jcdcdev.png"
   },
   "Category": "Developer Tools",
-  "Description": "This packages helps keep your Backoffice organised",
+  "Description": "Keep your BackOffice organised!",
   "LicenseTypes": [
     "Free"
   ],
@@ -17,7 +17,7 @@
   "Tags": [
     "Backoffice"
   ],
-  "Title": "Umbraco.Community.BackOfficeOrganiser",
+  "Title": "Back Office Organiser",
   "Screenshots": [
     {
       "ImageUrl": "https://raw.githubusercontent.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/main/docs/screenshots/backoffice.png",
