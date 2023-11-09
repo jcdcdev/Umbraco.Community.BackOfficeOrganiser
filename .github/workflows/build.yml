@@ -15,8 +15,7 @@ jobs:
       npm-working-dir: './src/Umbraco.Community.BackOfficeOrganiser.Client/'
       npm-run-command: 'build'
       deploy: false
-      color-primary: '#113537'
-      color-secondary: '#8A897C'
+      color-secondary: '#113537'
       color-tertiary: '#A4F9C8'
     secrets:
       nuget-api-key: ${{ secrets.NUGET_API_KEY }}
