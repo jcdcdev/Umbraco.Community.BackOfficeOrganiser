@@ -16,31 +16,25 @@
 		<Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © James Carter</Copyright>
 		<PackageProjectUrl>https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser</RepositoryUrl>
-		<PackageReadmeFile>README_nuget.md</PackageReadmeFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageIcon>images\icon.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="jcdcdev.Umbraco.Core" Version="0.2.1" />
+		<PackageReference Include="jcdcdev.Umbraco.Core" Version="0.2.1"/>
 		<PackageReference Include="Umbraco.Cms.Web.Website" Version="10.3.0"/>
 		<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.3.0"/>
 		<PackageReference Include="Umbraco.Community.SimpleDashboards" Version="0.2.0"/>
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="icon.png" Pack="true" Visible="false" PackagePath="images\icon.png"/>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\..\docs\README_nuget.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
 		<Folder Include="wwwroot\"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\docs\icon.png" Pack="true" Visible="false" PackagePath="images\icon.png"/>
+		<None Include="..\..\.github\README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 </Project>
