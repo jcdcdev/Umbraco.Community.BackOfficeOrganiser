@@ -1,0 +1,6 @@
+<Project>
+	<ItemGroup>
+		<None Include="..\..\docs\icon.png" Pack="true" Visible="false" PackagePath="images\icon.png"/>
+		<None Include="..\..\.github\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
+</Project>
