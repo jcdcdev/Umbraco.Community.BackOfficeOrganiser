@@ -10,7 +10,8 @@
 		<Product>Umbraco.Community.BackOfficeOrganiser</Product>
 		<PackageId>Umbraco.Community.BackOfficeOrganiser</PackageId>
 		<Title>Umbraco.Community.BackOfficeOrganiser</Title>
-		<PackageTags>umbraco</PackageTags>
+		<Description>This packages helps keep your Backoffice organised.</Description>
+		<PackageTags>umbraco;umbraco-marketplace</PackageTags>
 		<Authors>James Carter</Authors>
 		<Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © James Carter</Copyright>
 		<PackageProjectUrl>https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser</PackageProjectUrl>
