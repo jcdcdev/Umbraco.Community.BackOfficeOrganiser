@@ -23,9 +23,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="jcdcdev.Umbraco.Core" Version="0.2.0" />
-		<PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0"/>
-		<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0"/>
+		<PackageReference Include="jcdcdev.Umbraco.Core" Version="0.2.1" />
+		<PackageReference Include="Umbraco.Cms.Web.Website" Version="10.3.0"/>
+		<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.3.0"/>
 		<PackageReference Include="Umbraco.Community.SimpleDashboards" Version="0.2.0"/>
 	</ItemGroup>
 

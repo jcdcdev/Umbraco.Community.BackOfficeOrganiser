@@ -64,8 +64,10 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
             Constants.PropertyEditors.Aliases.BlockList => "Block List",
 
             Constants.PropertyEditors.Aliases.NestedContent => "Nested Content",
-
+            
+            Constants.PropertyEditors.Aliases.BlockGrid => "Grid",
             Constants.PropertyEditors.Aliases.Grid => "Grid",
+            
             Constants.PropertyEditors.Aliases.ImageCropper => "Image Cropper",
 
             Constants.PropertyEditors.Aliases.ListView => "List View",
