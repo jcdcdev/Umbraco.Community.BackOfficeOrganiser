@@ -6,13 +6,13 @@
 
 Is your Backoffice a bit untidy?
 
-- Single-click organiser for
+- Single-click (and opinionated) organiser for
     - Data Types
     - Document Types
     - Media Types
     - Member Types
 
-<img alt="A screenshot of the BackOffice Organiser in action" src="https://raw.githubusercontent.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/main/docs/screenshots/backoffice.png" />
+![A screenshot of the BackOffice Organiser in action](https://raw.githubusercontent.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/main/docs/screenshots/backoffice.png)
 
 ## Quick Start
 
