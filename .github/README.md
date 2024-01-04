@@ -1,8 +1,9 @@
 # Umbraco.Community.BackOfficeOrganiser
 
-[![Downloads](https://img.shields.io/nuget/dt/Umbraco.Community.BackOfficeOrganiser?color=cc9900)](https://www.nuget.org/packages/Umbraco.Community.BackOfficeOrganiser/)
+[![Umbraco Version](https://img.shields.io/badge/Umbraco-10.4+-%233544B1?style=flat&logo=umbraco)](https://umbraco.com/products/umbraco-cms/)
 [![NuGet](https://img.shields.io/nuget/vpre/Umbraco.Community.BackOfficeOrganiser?color=0273B3)](https://www.nuget.org/packages/Umbraco.Community.BackOfficeOrganiser)
 [![GitHub license](https://img.shields.io/github/license/jcdcdev/Umbraco.Community.BackOfficeOrganiser?color=8AB803)](../LICENSE)
+[![Downloads](https://img.shields.io/nuget/dt/Umbraco.Community.BackOfficeOrganiser?color=cc9900)](https://www.nuget.org/packages/Umbraco.Community.BackOfficeOrganiser/)
 
 Is your Backoffice a bit untidy?
 
