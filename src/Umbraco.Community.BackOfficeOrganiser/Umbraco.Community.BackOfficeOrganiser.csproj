@@ -14,7 +14,7 @@
 		<PackageTags>umbraco;umbraco-marketplace</PackageTags>
 		<Authors>James Carter</Authors>
 		<Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © James Carter</Copyright>
-		<PackageProjectUrl>https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser</PackageProjectUrl>
+		<PackageProjectUrl>https://jcdc.dev/umbraco-packages/back-office-organiser</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryType>git</RepositoryType>
