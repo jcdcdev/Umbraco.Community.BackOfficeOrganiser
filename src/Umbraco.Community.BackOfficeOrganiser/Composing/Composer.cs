@@ -6,8 +6,9 @@ using Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
+using Umbraco.Community.BackOfficeOrganiser.Services;
 
-namespace Umbraco.Community.BackOfficeOrganiser;
+namespace Umbraco.Community.BackOfficeOrganiser.Composing;
 
 public class Composer : IComposer
 {
