@@ -1,6 +1,6 @@
 using Umbraco.Cms.Core.Manifest;
 
-namespace Umbraco.Community.BackOfficeOrganiser;
+namespace Umbraco.Community.BackOfficeOrganiser.Composing;
 
 internal class ManifestFilter : IManifestFilter
 {
