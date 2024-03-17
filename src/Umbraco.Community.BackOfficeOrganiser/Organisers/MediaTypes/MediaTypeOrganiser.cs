@@ -2,7 +2,6 @@ using jcdcdev.Umbraco.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
-using Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
 

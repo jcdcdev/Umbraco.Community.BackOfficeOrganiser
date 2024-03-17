@@ -64,10 +64,10 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
             Constants.PropertyEditors.Aliases.BlockList => "Block List",
 
             Constants.PropertyEditors.Aliases.NestedContent => "Nested Content",
-            
+
             Constants.PropertyEditors.Aliases.BlockGrid => "Grid",
             Constants.PropertyEditors.Aliases.Grid => "Grid",
-            
+
             Constants.PropertyEditors.Aliases.ImageCropper => "Image Cropper",
 
             Constants.PropertyEditors.Aliases.ListView => "List View",
@@ -94,17 +94,20 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
             Constants.PropertyEditors.Aliases.MultiUrlPicker => "Picker",
             Constants.PropertyEditors.Aliases.PickerRelations => "Picker",
 
-            Constants.PropertyEditors.Aliases.Decimal => "Text",
-            Constants.PropertyEditors.Aliases.Slider => "Text",
-            Constants.PropertyEditors.Aliases.Integer => "Text",
-            Constants.PropertyEditors.Aliases.DateTime => "Text",
+            Constants.PropertyEditors.Aliases.Decimal => "Number",
+            Constants.PropertyEditors.Aliases.Slider => "Number",
+            Constants.PropertyEditors.Aliases.Integer => "Number",
+
+            Constants.PropertyEditors.Aliases.DateTime => "Date",
+
             Constants.PropertyEditors.Aliases.MultipleTextstring => "Text",
             Constants.PropertyEditors.Aliases.TextBox => "Text",
             Constants.PropertyEditors.Aliases.TextArea => "Text",
-            Constants.PropertyEditors.Aliases.TinyMce => "Text",
             Constants.PropertyEditors.Aliases.EmailAddress => "Text",
-            Constants.PropertyEditors.Aliases.MarkdownEditor => "Text",
             Constants.PropertyEditors.Aliases.Label => "Text",
+
+            Constants.PropertyEditors.Aliases.TinyMce => "Rich Text",
+            Constants.PropertyEditors.Aliases.MarkdownEditor => "Rich Text",
 
             _ => ResolveDataTypeFolderName(dataType)
         };
