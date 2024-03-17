@@ -6,7 +6,7 @@ using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
-namespace Umbraco.Community.BackOfficeOrganiser;
+namespace Umbraco.Community.BackOfficeOrganiser.Services;
 
 public class BackOfficeOrganiserService : IBackOfficeOrganiserService
 {
@@ -48,9 +48,7 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
                 case OrganiseType.DataTypes:
                     OrganiseDataTypes();
                     break;
-                case OrganiseType.All:
-                    OrganiseAll();
-                    break;
+                case OrganiseType.Unknown:
                 default:
                     throw new ArgumentOutOfRangeException(nameof(organise), organise,
                         "Failed to determine OrganiseType");
@@ -65,17 +63,9 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
         return Attempt<OrganiseType>.Succeed(organise);
     }
 
-    public void OrganiseDataTypes()
+    private void OrganiseDataTypes()
     {
         _dataTypeOrganiser.OrganiseType();
-    }
-
-    private void OrganiseAll()
-    {
-        OrganiseContentTypes();
-        OrganiseMediaTypes();
-        OrganiseMemberTypes();
-        OrganiseDataTypes();
     }
 
     private void OrganiseMemberTypes()

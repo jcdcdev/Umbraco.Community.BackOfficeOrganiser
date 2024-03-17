@@ -4,7 +4,7 @@ using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
-namespace Umbraco.Community.BackOfficeOrganiser;
+namespace Umbraco.Community.BackOfficeOrganiser.Composing;
 
 public static class UmbracoBuilderExtensions
 {

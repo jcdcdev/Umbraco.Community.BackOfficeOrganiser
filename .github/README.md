@@ -8,20 +8,21 @@
 Is your Backoffice a bit untidy?
 
 - Single-click (and opinionated) organiser for
-    - Data Types
     - Document Types
     - Media Types
     - Member Types
+    - Data Types
 
-![A screenshot of the BackOffice Organiser in action](https://raw.githubusercontent.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/main/docs/screenshots/backoffice.png)
+![A screenshot of the Back Office Organiser in action](https://raw.githubusercontent.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/main/docs/screenshots/backoffice.png)
 
 ## Quick Start
 
 - Go to the backoffice
-- Click `Back Office Organiser`
+- Click `Settings`
+- Click `Organise`
 - Select the types you wish to organise
 - Click submit and confirm
-- Refresh your page and enjoy a cleaner backoffice 😀
+- Refresh your page and enjoy a cleaner backoffice ✨
 
 ## Configuration
 Add the following to your `appsettings.json` file
@@ -40,10 +41,10 @@ Add the following to your `appsettings.json` file
 
 You can implement your own `Organise Action`, a method that determines where a type should be moved to. Implement the following interfaces:
 
-- `Media Types` => `IMediaTypeOrganiseAction`
 - `Document Types` => `IContentTypeOrganiseAction`
-- `Data Types` => `IDataTypeOrganiseAction`
+- `Media Types` => `IMediaTypeOrganiseAction`
 - `Member Types` => `IMemberTypeOrganiseAction`
+- `Data Types` => `IDataTypeOrganiseAction`
 
 ### Example
 ```csharp
