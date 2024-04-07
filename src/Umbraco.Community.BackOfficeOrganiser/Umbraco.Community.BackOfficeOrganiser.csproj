@@ -38,7 +38,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="jcdcdev.Umbraco.Core" Version="0.2.1"/>
+		<PackageReference Include="jcdcdev.Umbraco.Core" Version="0.2.4"/>
 		<PackageReference Include="Umbraco.Community.SimpleDashboards" Version="0.2.2"/>
 	</ItemGroup>
 
