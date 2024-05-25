@@ -1,5 +1,5 @@
 using Umbraco.Cms.Core.Composing;
-using Umbraco.Community.BackOfficeOrganiser;
+using Umbraco.Community.BackOfficeOrganiser.Composing;
 
 namespace TestSite.Thirteen;
 
