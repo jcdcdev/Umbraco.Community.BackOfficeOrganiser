@@ -22,7 +22,7 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
 
     public bool CanMove(IDataType dataType, IDataTypeService dataTypeService) => true;
 
-    public async Task Move(IDataType dataType, IDataTypeService dataTypeService)
+    public async Task MoveAsync(IDataType dataType, IDataTypeService dataTypeService)
     {
         string internalFolder;
         if (dataType.IsInternalUmbracoEditor())

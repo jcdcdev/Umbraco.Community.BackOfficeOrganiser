@@ -19,14 +19,16 @@ public class DataTypeOrganiser : BackOfficeOrganiserBase<IDataType>
         _organiseActions = organiseActions;
     }
 
-    public override void Organise()
+    protected override async Task OrganiseAsync()
     {
-        var dataTypes = _dataTypeService.GetAll().ToList();
-
+        var dataTypes = await _dataTypeService.GetAllAsync();
         foreach (var dataType in dataTypes)
         {
             var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(dataType, _dataTypeService));
-            organiser?.Move(dataType, _dataTypeService);
+            if (organiser != null)
+            {
+                await organiser.MoveAsync(dataType, _dataTypeService);
+            }
         }
 
         _dataTypeService.DeleteAllEmptyContainers();

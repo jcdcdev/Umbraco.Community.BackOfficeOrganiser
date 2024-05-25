@@ -19,14 +19,16 @@ public class ContentTypeOrganiser : BackOfficeOrganiserBase<IContentType>
         _organiseActions = organiseActions;
     }
 
-    public override void Organise()
+    protected override async Task OrganiseAsync()
     {
         var contentTypes = _contentTypeService.GetAll().ToList();
-
         foreach (var contentType in contentTypes)
         {
             var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(contentType, _contentTypeService));
-            organiser?.Move(contentType, _contentTypeService);
+            if (organiser != null)
+            {
+                await organiser.MoveAsync(contentType, _contentTypeService);
+            }
         }
 
         _contentTypeService.DeleteAllEmptyContainers();

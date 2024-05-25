@@ -30,23 +30,23 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
         _dataTypeOrganiser = dataTypeOrganiser;
     }
 
-    public Attempt<OrganiseType> Organise(OrganiseType organise)
+    public async Task<Attempt<OrganiseType>> OrganiseAsync(OrganiseType organise)
     {
         try
         {
             switch (organise)
             {
                 case OrganiseType.ContentTypes:
-                    OrganiseContentTypes();
+                    await OrganiseContentTypesAsync();
                     break;
                 case OrganiseType.MediaTypes:
-                    OrganiseMediaTypes();
+                    await OrganiseMediaTypesAsync();
                     break;
                 case OrganiseType.MemberTypes:
-                    OrganiseMemberTypes();
+                    await OrganiseMemberTypesAsync();
                     break;
                 case OrganiseType.DataTypes:
-                    OrganiseDataTypes();
+                    await OrganiseDataTypesAsync();
                     break;
                 case OrganiseType.Unknown:
                 default:
@@ -63,23 +63,23 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
         return Attempt<OrganiseType>.Succeed(organise);
     }
 
-    private void OrganiseDataTypes()
+    private async Task OrganiseDataTypesAsync()
     {
-        _dataTypeOrganiser.OrganiseType();
+        await _dataTypeOrganiser.OrganiseTypeAsync();
     }
 
-    private void OrganiseMemberTypes()
+    private async Task OrganiseMemberTypesAsync()
     {
-        _memberTypeOrganiser.OrganiseType();
+        await _memberTypeOrganiser.OrganiseTypeAsync();
     }
 
-    private void OrganiseMediaTypes()
+    private async Task OrganiseMediaTypesAsync()
     {
-        _mediaTypeOrganiser.OrganiseType();
+        await _mediaTypeOrganiser.OrganiseTypeAsync();
     }
 
-    private void OrganiseContentTypes()
+    private async Task OrganiseContentTypesAsync()
     {
-        _contentTypeOrganiser.OrganiseType();
+        await _contentTypeOrganiser.OrganiseTypeAsync();
     }
 }

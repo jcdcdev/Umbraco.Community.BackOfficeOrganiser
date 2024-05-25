@@ -1,5 +1,6 @@
 using jcdcdev.Umbraco.Core.Extensions;
 using StackExchange.Profiling.Internal;
+using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
 
@@ -9,9 +10,9 @@ public class DefaultContentTypeOrganiseAction : IContentTypeOrganiseAction
 {
     public bool CanMove(IContentType contentType, IContentTypeService contentTypeService) => true;
 
-    public void Move(IContentType contentType, IContentTypeService contentTypeService)
+    public async Task MoveAsync(IContentType contentType, IContentTypeService contentTypeService)
     {
-        var folderId = -1;
+        var folderKey = Constants.System.RootKey;
         var folderName = string.Empty;
         var isComposition = contentTypeService.GetComposedOf(contentType.Id).Any();
 
@@ -30,9 +31,9 @@ public class DefaultContentTypeOrganiseAction : IContentTypeOrganiseAction
 
         if (!folderName.IsNullOrWhiteSpace())
         {
-            folderId = contentTypeService.GetOrCreateFolder(folderName).Id;
+            folderKey = contentTypeService.GetOrCreateFolder(folderName).Key;
         }
 
-        contentTypeService.Move(contentType, folderId);
+        await contentTypeService.MoveAsync(contentType.Key, folderKey);
     }
 }

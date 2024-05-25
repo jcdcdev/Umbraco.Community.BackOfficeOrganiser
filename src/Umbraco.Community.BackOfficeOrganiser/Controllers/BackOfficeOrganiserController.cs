@@ -25,12 +25,12 @@ public class BackOfficeOrganiserController : ControllerBase
 
     [HttpGet]
     [Route("organise")]
-    public IActionResult Organise([FromQuery]OrganiseRequest model)
+    public async Task<IActionResult> Organise([FromQuery] OrganiseRequest model)
     {
         var success = true;
         foreach (var type in model.Types.Select(DetermineOrganiseType).Distinct())
         {
-            var attempt = _service.Organise(type);
+            var attempt = await _service.OrganiseAsync(type);
             if (!attempt.Success)
             {
                 success = false;

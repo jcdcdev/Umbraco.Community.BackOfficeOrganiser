@@ -10,16 +10,16 @@ public class DefaultMediaTypeOrganiseAction : IMediaTypeOrganiseAction
 {
     public bool CanMove(IMediaType mediaType, IMediaTypeService mediaTypeService) => true;
 
-    public void Move(IMediaType mediaType, IMediaTypeService mediaTypeService)
+    public async Task MoveAsync(IMediaType mediaType, IMediaTypeService mediaTypeService)
     {
-        var folderId = -1;
-        var parentId = -1;
+        var folderKey = Constants.System.RootKey;
+        var parentId = Constants.System.Root;
         var folderName = string.Empty;
 
         if (mediaType.IsInternal())
         {
-            parentId = mediaTypeService.GetOrCreateFolder("Internal").Id;
-            folderId = parentId;
+            var parent = mediaTypeService.GetOrCreateFolder("Internal");
+            folderKey = parent.Key;
             folderName = mediaType.Alias switch
             {
                 Constants.Conventions.MediaTypes.File => string.Empty,
@@ -40,9 +40,9 @@ public class DefaultMediaTypeOrganiseAction : IMediaTypeOrganiseAction
 
         if (!folderName.IsNullOrWhiteSpace())
         {
-            folderId = mediaTypeService.GetOrCreateFolder(folderName, parentId).Id;
+            folderKey = mediaTypeService.GetOrCreateFolder(folderName, parentId).Key;
         }
 
-        mediaTypeService.Move(mediaType, folderId);
+        await mediaTypeService.MoveAsync(mediaType.Key, folderKey);
     }
 }

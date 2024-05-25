@@ -4,20 +4,20 @@ namespace Umbraco.Community.BackOfficeOrganiser.Organisers;
 
 public abstract class BackOfficeOrganiserBase<T> : IBackOfficeOrganiser<T>
 {
-    public readonly ILogger Logger;
+    protected readonly ILogger Logger;
 
     protected BackOfficeOrganiserBase(ILogger logger)
     {
         Logger = logger;
     }
 
-    public void OrganiseType()
+    public async Task OrganiseTypeAsync()
     {
         Logger.LogInformation("BackOfficeOrganiser: Cleanup for {Type} Started", typeof(T).Name);
 
         try
         {
-            Organise();
+            await OrganiseAsync();
         }
         catch (Exception ex)
         {
@@ -28,5 +28,5 @@ public abstract class BackOfficeOrganiserBase<T> : IBackOfficeOrganiser<T>
         Logger.LogInformation("BackOfficeOrganiser: Cleanup for {Type} Complete", typeof(T).Name);
     }
 
-    public abstract void Organise();
+    protected abstract Task OrganiseAsync();
 }
