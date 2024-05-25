@@ -22,7 +22,7 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
 
     public bool CanMove(IDataType dataType, IDataTypeService dataTypeService) => true;
 
-    public void Move(IDataType dataType, IDataTypeService dataTypeService)
+    public async Task Move(IDataType dataType, IDataTypeService dataTypeService)
     {
         string internalFolder;
         if (dataType.IsInternalUmbracoEditor())
@@ -43,12 +43,12 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
         if (folder.IsNullOrWhiteSpace())
         {
             _logger.LogWarning("Failed to determine folder name. {DataType} will be considered Custom", dataType.Name);
-            dataTypeService.Move(dataType, parentFolder.Id);
+            await dataTypeService.MoveAsync(dataType, parentFolder.Key, Constants.Security.SuperUserKey);
             return;
         }
 
         var dataTypeFolder = dataTypeService.GetOrCreateFolder(folder, parentFolder.Id);
-        dataTypeService.Move(dataType, dataTypeFolder.Id);
+        await dataTypeService.MoveAsync(dataType, dataTypeFolder.Key, Constants.Security.SuperUserKey);
     }
 
     private static string ResolveDataTypeFolderName(IDataType dataType)
@@ -84,7 +84,6 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
             Constants.PropertyEditors.Aliases.ColorPickerEyeDropper => "Picker",
             Constants.PropertyEditors.Aliases.ColorPicker => "Picker",
             Constants.PropertyEditors.Aliases.ContentPicker => "Picker",
-            Constants.PropertyEditors.Aliases.MediaPicker => "Picker",
             Constants.PropertyEditors.Aliases.MultipleMediaPicker => "Picker",
             Constants.PropertyEditors.Aliases.MemberPicker => "Picker",
             Constants.PropertyEditors.Aliases.MemberGroupPicker => "Picker",
@@ -107,6 +106,7 @@ public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
             Constants.PropertyEditors.Aliases.Label => "Text",
 
             Constants.PropertyEditors.Aliases.TinyMce => "Rich Text",
+            Constants.PropertyEditors.Aliases.RichText => "Rich Text",
             Constants.PropertyEditors.Aliases.MarkdownEditor => "Rich Text",
 
             _ => ResolveDataTypeFolderName(dataType)

@@ -7,7 +7,7 @@ namespace Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
 public class DefaultMemberTypeOrganiseAction : IMemberTypeOrganiseAction
 {
-    public bool CanMove(IMemberType memberType, IMemberTypeService memberTypeService) => !memberType.IsContainer;
+    public bool CanMove(IMemberType memberType, IMemberTypeService memberTypeService) => true;
 
     public void Move(IMemberType memberType, IMemberTypeService memberTypeService)
     {

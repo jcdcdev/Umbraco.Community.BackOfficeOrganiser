@@ -8,7 +8,7 @@ namespace Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
 
 public class DefaultMediaTypeOrganiseAction : IMediaTypeOrganiseAction
 {
-    public bool CanMove(IMediaType mediaType, IMediaTypeService mediaTypeService) => !mediaType.IsContainer;
+    public bool CanMove(IMediaType mediaType, IMediaTypeService mediaTypeService) => true;
 
     public void Move(IMediaType mediaType, IMediaTypeService mediaTypeService)
     {

@@ -1,10 +1,8 @@
-using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Umbraco.Cms.Web.BackOffice.Filters;
+using Umbraco.Cms.Core;
 using Umbraco.Cms.Web.Common.Attributes;
 using Umbraco.Cms.Web.Common.Authorization;
-using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Cms.Web.Common.Filters;
 using Umbraco.Community.BackOfficeOrganiser.Models;
 
@@ -12,10 +10,11 @@ namespace Umbraco.Community.BackOfficeOrganiser.Controllers;
 
 [IsBackOffice]
 [UmbracoUserTimeoutFilter]
-[Authorize(Policy = AuthorizationPolicies.BackOfficeAccess)]
+// [Authorize(Policy = AuthorizationPolicies.BackOfficeAccess)]
 [DisableBrowserCache]
-[UmbracoRequireHttps]
-public class BackOfficeOrganiserController : UmbracoApiController
+[ApiController]
+[Route("umbraco/backofficeorganiser")]
+public class BackOfficeOrganiserController : ControllerBase
 {
     private readonly IBackOfficeOrganiserService _service;
 
@@ -24,8 +23,9 @@ public class BackOfficeOrganiserController : UmbracoApiController
         _service = service;
     }
 
-    [HttpPost]
-    public IActionResult Organise(OrganiseRequest model)
+    [HttpGet]
+    [Route("organise")]
+    public IActionResult Organise([FromQuery]OrganiseRequest model)
     {
         var success = true;
         foreach (var type in model.Types.Select(DetermineOrganiseType).Distinct())

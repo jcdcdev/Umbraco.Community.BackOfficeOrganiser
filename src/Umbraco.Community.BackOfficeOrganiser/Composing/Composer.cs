@@ -23,9 +23,7 @@ public class Composer : IComposer
         builder.Services.AddSingleton<ContentTypeOrganiser>();
         builder.Services.AddSingleton<MemberTypeOrganiser>();
         builder.Services.AddSingleton<MediaTypeOrganiser>();
-
-        builder.ManifestFilters().Append<ManifestFilter>();
-
+        
         builder.DataTypeOrganiseActions().Append<DefaultDataTypeOrganiseAction>();
         builder.ContentTypeOrganiseActions().Append<DefaultContentTypeOrganiseAction>();
         builder.MediaTypeOrganiseActions().Append<DefaultMediaTypeOrganiseAction>();

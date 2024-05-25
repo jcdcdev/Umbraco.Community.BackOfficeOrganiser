@@ -7,7 +7,7 @@ namespace Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
 
 public class DefaultContentTypeOrganiseAction : IContentTypeOrganiseAction
 {
-    public bool CanMove(IContentType contentType, IContentTypeService contentTypeService) => !contentType.IsContainer;
+    public bool CanMove(IContentType contentType, IContentTypeService contentTypeService) => true;
 
     public void Move(IContentType contentType, IContentTypeService contentTypeService)
     {
