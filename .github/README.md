@@ -1,11 +1,10 @@
 # Umbraco.Community.BackOfficeOrganiser
 
-[![Umbraco Version](https://img.shields.io/badge/Umbraco-10.4+-%233544B1?style=flat&logo=umbraco)](https://umbraco.com/products/umbraco-cms/)
-[![NuGet](https://img.shields.io/nuget/vpre/Umbraco.Community.BackOfficeOrganiser?color=0273B3)](https://www.nuget.org/packages/Umbraco.Community.BackOfficeOrganiser)
-[![GitHub license](https://img.shields.io/github/license/jcdcdev/Umbraco.Community.BackOfficeOrganiser?color=8AB803)](../LICENSE)
-[![Downloads](https://img.shields.io/nuget/dt/Umbraco.Community.BackOfficeOrganiser?color=cc9900)](https://www.nuget.org/packages/Umbraco.Community.BackOfficeOrganiser/)
+[![Umbraco Marketplace](https://img.shields.io/badge/Umbraco-Marketplace-%233544B1?style=flat&logo=umbraco)](https://marketplace.umbraco.com/package/umbraco.community.backofficeorganiser)
+[![GitHub License](https://img.shields.io/github/license/jcdcdev/Umbraco.Community.BackOfficeOrganiser?color=8AB803&label=License&logo=github)](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/blob/main/LICENSE)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Umbraco.Community.BackOfficeOrganiser?color=cc9900&label=Downloads&logo=nuget)](https://www.nuget.org/packages/Umbraco.Community.BackOfficeOrganiser/)
 
-Is your Backoffice a bit untidy?
+Is your backoffice a bit untidy?
 
 - Single-click (and opinionated) organiser for
     - Document Types
@@ -99,7 +98,7 @@ public class Composer : IComposer
 
 ## Contributing
 
-Contributions to this package are most welcome! Please read the [Contributing Guidelines](CONTRIBUTING.md).
+Contributions to this package are most welcome! Please read the [Contributing Guidelines](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/blob/main/.github/CONTRIBUTING.md).
 
 ## Acknowledgments (thanks!)
 
