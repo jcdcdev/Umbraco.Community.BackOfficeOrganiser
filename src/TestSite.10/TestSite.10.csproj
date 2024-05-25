@@ -7,13 +7,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Umbraco.Cms" Version="10.8.5"/>
+		<PackageReference Include="Umbraco.Cms" Version="10.8.6"/>
 		<PackageReference Include="uSync" Version="10.7.3"/>
 	</ItemGroup>
 
 	<ItemGroup>
 		<!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
-		<PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="72.1.0.3"/>
+		<PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="68.2.0.9"/>
 		<RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="68.2.0.9" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))"/>
 	</ItemGroup>
 
@@ -25,11 +25,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Umbraco.Community.BackOfficeOrganiser\Umbraco.Community.BackOfficeOrganiser.csproj" />
-		<ProjectReference Include="..\Umbraco.Community.SimpleDashboards\Umbraco.Community.SimpleDashboards.csproj"/>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Views\Dashboards\Basic.cshtml" />
 	</ItemGroup>
 
 	<PropertyGroup>
