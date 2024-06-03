@@ -63,23 +63,59 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
         return Attempt<OrganiseType>.Succeed(organise);
     }
 
-    private async Task OrganiseDataTypesAsync()
+    public async Task<Attempt<OrganiseType>> OrganiseDataTypesAsync()
     {
-        await _dataTypeOrganiser.OrganiseTypeAsync();
+        try
+        {
+            await _dataTypeOrganiser.OrganiseTypeAsync();
+        }
+        catch (Exception ex)
+        {
+            return Attempt<OrganiseType>.Fail(ex);
+        }
+
+        return Attempt<OrganiseType>.Succeed(OrganiseType.DataTypes);
     }
 
-    private async Task OrganiseMemberTypesAsync()
+    public async Task<Attempt<OrganiseType>> OrganiseMemberTypesAsync()
     {
-        await _memberTypeOrganiser.OrganiseTypeAsync();
+        try
+        {
+            await _memberTypeOrganiser.OrganiseTypeAsync();
+        }
+        catch (Exception ex)
+        {
+            return Attempt<OrganiseType>.Fail(ex);
+        }
+
+        return Attempt<OrganiseType>.Succeed(OrganiseType.MemberTypes);
     }
 
-    private async Task OrganiseMediaTypesAsync()
+    public async Task<Attempt<OrganiseType>> OrganiseMediaTypesAsync()
     {
-        await _mediaTypeOrganiser.OrganiseTypeAsync();
+        try
+        {
+            await _mediaTypeOrganiser.OrganiseTypeAsync();
+        }
+        catch (Exception ex)
+        {
+            return Attempt<OrganiseType>.Fail(ex);
+        }
+
+        return Attempt<OrganiseType>.Succeed(OrganiseType.MediaTypes);
     }
 
-    private async Task OrganiseContentTypesAsync()
+    public async Task<Attempt<OrganiseType>> OrganiseContentTypesAsync()
     {
-        await _contentTypeOrganiser.OrganiseTypeAsync();
+        try
+        {
+            await _contentTypeOrganiser.OrganiseTypeAsync();
+        }
+        catch (Exception ex)
+        {
+            return Attempt<OrganiseType>.Fail(ex);
+        }
+
+        return Attempt<OrganiseType>.Succeed(OrganiseType.ContentTypes);
     }
 }

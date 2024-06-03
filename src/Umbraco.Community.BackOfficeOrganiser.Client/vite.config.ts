@@ -9,7 +9,7 @@ export default defineConfig({
     outDir: "../Umbraco.Community.BackOfficeOrganiser/wwwroot/App_Plugins/Umbraco.Community.BackOfficeOrganiser/dist/",
     sourcemap: true,
     rollupOptions: {
-      external: [/^@umbraco-ui/],
+      external: [/^@umbraco/],
     },
   },
 });

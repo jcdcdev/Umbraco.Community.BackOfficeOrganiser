@@ -1,19 +1,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Umbraco.Cms.Core;
-using Umbraco.Cms.Web.Common.Attributes;
 using Umbraco.Cms.Web.Common.Authorization;
-using Umbraco.Cms.Web.Common.Filters;
+using Umbraco.Cms.Web.Common.Routing;
 using Umbraco.Community.BackOfficeOrganiser.Models;
+using Umbraco.Community.BackOfficeOrganiser.Services;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Controllers;
 
-[IsBackOffice]
-[UmbracoUserTimeoutFilter]
-// [Authorize(Policy = AuthorizationPolicies.BackOfficeAccess)]
-[DisableBrowserCache]
 [ApiController]
-[Route("umbraco/backofficeorganiser")]
+[BackOfficeRoute("backofficeorganiser/api")]
+[Authorize(Policy = AuthorizationPolicies.BackOfficeAccess)]
 public class BackOfficeOrganiserController : ControllerBase
 {
     private readonly IBackOfficeOrganiserService _service;
@@ -23,12 +19,13 @@ public class BackOfficeOrganiserController : ControllerBase
         _service = service;
     }
 
-    [HttpGet]
-    [Route("organise")]
-    public async Task<IActionResult> Organise([FromQuery] OrganiseRequest model)
+    [HttpPost("organise")]
+    [Produces(typeof(OrganiseResponse))]
+    [Consumes(typeof(OrganiseRequest), "application/json")]
+    public async Task<IActionResult> Organise([FromBody] OrganiseRequest model)
     {
         var success = true;
-        foreach (var type in model.Types.Select(DetermineOrganiseType).Distinct())
+        foreach (var type in model.GetOrganiseTypes())
         {
             var attempt = await _service.OrganiseAsync(type);
             if (!attempt.Success)

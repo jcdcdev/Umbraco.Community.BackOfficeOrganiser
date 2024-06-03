@@ -24,13 +24,18 @@ public class DataTypeOrganiser : BackOfficeOrganiserBase<IDataType>
         var dataTypes = await _dataTypeService.GetAllAsync();
         foreach (var dataType in dataTypes)
         {
-            var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(dataType, _dataTypeService));
-            if (organiser != null)
-            {
-                await organiser.MoveAsync(dataType, _dataTypeService);
-            }
+            await OrganiseAsync(dataType);
         }
 
         _dataTypeService.DeleteAllEmptyContainers();
+    }
+
+    public async Task OrganiseAsync(IDataType dataType)
+    {
+        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(dataType, _dataTypeService));
+        if (organiser != null)
+        {
+            await organiser.MoveAsync(dataType, _dataTypeService);
+        }
     }
 }

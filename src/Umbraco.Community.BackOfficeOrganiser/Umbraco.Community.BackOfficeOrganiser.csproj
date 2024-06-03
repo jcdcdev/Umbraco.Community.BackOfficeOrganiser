@@ -23,9 +23,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="jcdcdev.Umbraco.Core" Version="14.0.0-alpha0003"/>
-		<PackageReference Include="Umbraco.Cms.Core" Version="14.0.0-rc4"/>
-		<PackageReference Include="Umbraco.Cms.Infrastructure" Version="14.0.0-rc4"/>
+		<PackageReference Include="jcdcdev.Umbraco.Core" Version="[14.0.0,15.0.0)"/>
+		<PackageReference Include="Umbraco.Cms.Core" Version="[14.0.0,15.0.0)"/>
+		<PackageReference Include="Umbraco.Cms.Infrastructure" Version="[14.0.0,15.0.0)"/>
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
@@ -43,5 +43,5 @@
 		<None Include="..\..\docs\README_nuget.md" Pack="true" PackagePath="\"/>
 		<Folder Include="wwwroot\"/>
 	</ItemGroup>
-	
+
 </Project>

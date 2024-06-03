@@ -1,16 +1,5 @@
-﻿@inherits UmbracoViewPage<Home>
-
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    Layout = "_Layout";
+	Layout = null;
 }
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h1 class="display-1">@Model.Name</h1>
-            <div>
-                @await Html.GetBlockGridHtmlAsync(Model.GridContent)
-            </div>
-        </div>
-    </div>
-</div>

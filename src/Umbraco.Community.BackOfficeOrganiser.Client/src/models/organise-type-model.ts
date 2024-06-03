@@ -1,5 +1,7 @@
-export class OrganiseType {
-	value: number;
+import {OrganiseType} from "./organise-type.ts";
+
+export class OrganiseTypeModel {
+	value: OrganiseType;
 	label: string;
 	selected: boolean;
 	description: string;
