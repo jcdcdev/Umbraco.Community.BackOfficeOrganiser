@@ -19,16 +19,24 @@ public class MemberTypeOrganiser : BackOfficeOrganiserBase<IMemberType>
         _organiseActions = organiseActions;
     }
 
-    public override void Organise()
+    protected override async Task OrganiseAsync()
     {
         var memberTypes = _memberTypeService.GetAll().ToList();
 
         foreach (var memberType in memberTypes)
         {
-            var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(memberType, _memberTypeService));
-            organiser?.Move(memberType, _memberTypeService);
+            await OrganiseTypeAsync(memberType);
         }
 
         _memberTypeService.DeleteAllEmptyContainers();
+    }
+
+    public async Task OrganiseTypeAsync(IMemberType memberType)
+    {
+        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(memberType, _memberTypeService));
+        if (organiser != null)
+        {
+            await organiser.MoveAsync(memberType, _memberTypeService);
+        }
     }
 }

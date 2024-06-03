@@ -1,0 +1,13 @@
+{
+	"$schema": "umbraco-package-schema.json",
+	"version": "14.0.0",
+	"name": "Backoffice Organiser",
+	"extensions": [
+		{
+			"name": "backoffice-organiser.entrypoint",
+			"alias": "backoffice-organiser.entrypoint",
+			"type": "entryPoint",
+			"js": "/App_Plugins/Umbraco.Community.BackofficeOrganiser/dist/backoffice-organiser.js"
+		}
+	]
+}

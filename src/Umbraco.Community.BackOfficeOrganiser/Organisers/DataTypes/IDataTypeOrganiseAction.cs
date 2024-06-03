@@ -6,5 +6,5 @@ namespace Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 public interface IDataTypeOrganiseAction
 {
     public bool CanMove(IDataType dataType, IDataTypeService dataTypeService);
-    public void Move(IDataType dataType, IDataTypeService dataTypeService);
+    public Task MoveAsync(IDataType dataType, IDataTypeService dataTypeService);
 }

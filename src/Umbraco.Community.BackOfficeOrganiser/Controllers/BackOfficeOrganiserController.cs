@@ -1,21 +1,16 @@
-using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Umbraco.Cms.Web.BackOffice.Filters;
-using Umbraco.Cms.Web.Common.Attributes;
 using Umbraco.Cms.Web.Common.Authorization;
-using Umbraco.Cms.Web.Common.Controllers;
-using Umbraco.Cms.Web.Common.Filters;
+using Umbraco.Cms.Web.Common.Routing;
 using Umbraco.Community.BackOfficeOrganiser.Models;
+using Umbraco.Community.BackOfficeOrganiser.Services;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Controllers;
 
-[IsBackOffice]
-[UmbracoUserTimeoutFilter]
+[ApiController]
+[BackOfficeRoute("backofficeorganiser/api")]
 [Authorize(Policy = AuthorizationPolicies.BackOfficeAccess)]
-[DisableBrowserCache]
-[UmbracoRequireHttps]
-public class BackOfficeOrganiserController : UmbracoApiController
+public class BackOfficeOrganiserController : ControllerBase
 {
     private readonly IBackOfficeOrganiserService _service;
 
@@ -24,13 +19,15 @@ public class BackOfficeOrganiserController : UmbracoApiController
         _service = service;
     }
 
-    [HttpPost]
-    public IActionResult Organise(OrganiseRequest model)
+    [HttpPost("organise")]
+    [Produces(typeof(OrganiseResponse))]
+    [Consumes(typeof(OrganiseRequest), "application/json")]
+    public async Task<IActionResult> Organise([FromBody] OrganiseRequest model)
     {
         var success = true;
-        foreach (var type in model.Types.Select(DetermineOrganiseType).Distinct())
+        foreach (var type in model.GetOrganiseTypes())
         {
-            var attempt = _service.Organise(type);
+            var attempt = await _service.OrganiseAsync(type);
             if (!attempt.Success)
             {
                 success = false;
@@ -42,7 +39,7 @@ public class BackOfficeOrganiserController : UmbracoApiController
             return BadRequest(OrganiseResponse.Fail("Failed to organise"));
         }
 
-        return Ok(OrganiseResponse.Success($"Successfully organised 🚀"));
+        return Ok(OrganiseResponse.Success("Successfully organised \ud83d\ude80"));
     }
 
     private static OrganiseType DetermineOrganiseType(string input)

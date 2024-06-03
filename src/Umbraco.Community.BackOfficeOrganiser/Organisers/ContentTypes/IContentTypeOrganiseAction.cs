@@ -6,5 +6,5 @@ namespace Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
 public interface IContentTypeOrganiseAction
 {
     public bool CanMove(IContentType contentType, IContentTypeService contentTypeService);
-    public void Move(IContentType contentType, IContentTypeService contentTypeService);
+    public Task MoveAsync(IContentType contentType, IContentTypeService contentTypeService);
 }
