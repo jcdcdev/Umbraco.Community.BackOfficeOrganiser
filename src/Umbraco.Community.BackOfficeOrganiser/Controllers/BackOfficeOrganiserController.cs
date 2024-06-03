@@ -39,7 +39,7 @@ public class BackOfficeOrganiserController : ControllerBase
             return BadRequest(OrganiseResponse.Fail("Failed to organise"));
         }
 
-        return Ok(OrganiseResponse.Success($"Successfully organised 🚀"));
+        return Ok(OrganiseResponse.Success("Successfully organised \ud83d\ude80"));
     }
 
     private static OrganiseType DetermineOrganiseType(string input)

@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Logging;
-using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers;
 

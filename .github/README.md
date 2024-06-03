@@ -11,6 +11,7 @@ Is your backoffice a bit untidy?
     - Media Types
     - Member Types
     - Data Types
+- Automatically sorts on save (configurable)
 
 ![A screenshot of the Back Office Organiser in action](https://raw.githubusercontent.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/main/docs/screenshots/backoffice.png)
 
@@ -27,13 +28,25 @@ Is your backoffice a bit untidy?
 Add the following to your `appsettings.json` file
 
 ```JSON
-	"BackOfficeOrganiser": {
-		"DataTypes": {
-			"InternalFolderName": "Internal",
-			"ThirdPartyFolderName": "Third Party",
-			"CustomFolderName": "Custom"
-		}
-	}
+{
+  "BackOfficeOrganiser": {
+    "DataTypes": {
+      "InternalFolderName": "Internal",
+      "ThirdPartyFolderName": "Third Party",
+      "CustomFolderName": "Custom",
+      "OrganiseOnSave": true
+    },
+    "ContentTypes": {
+      "OrganiseOnSave": true
+    },
+    "MediaTypes": {
+      "OrganiseOnSave": true
+    },
+    "MemberTypes": {
+      "OrganiseOnSave": true
+    }
+  }
+}
 ```
 
 ## Extending

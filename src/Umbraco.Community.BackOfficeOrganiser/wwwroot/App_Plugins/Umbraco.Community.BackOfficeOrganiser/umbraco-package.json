@@ -7,7 +7,7 @@
 			"name": "backoffice-organiser.entrypoint",
 			"alias": "backoffice-organiser.entrypoint",
 			"type": "entryPoint",
-			"js":"/App_Plugins/Umbraco.Community.BackofficeOrganiser/dist/backoffice-organiser.js"
+			"js": "/App_Plugins/Umbraco.Community.BackofficeOrganiser/dist/backoffice-organiser.js"
 		}
 	]
 }
