@@ -29,3 +29,9 @@ jobs:
           version: ${{ steps.build.outputs.version }}
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge latest v14 into dev/v14
+        run: |
+          git checkout dev/v14
+          git pull origin dev/v14
+          git merge origin/v14
+          git push origin dev/v14
