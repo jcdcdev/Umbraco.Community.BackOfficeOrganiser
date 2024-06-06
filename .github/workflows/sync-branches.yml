@@ -16,15 +16,17 @@ jobs:
         id: branch_check
         run: |
           BRANCH_NAME=${{ github.ref }}
-          if [[ $BRANCH_NAME == refs/heads/v* ]]; then
-            echo "::set-output name=is-valid-branch::true"
+          if [[ $BRANCH_NAME =~ refs/heads/v.* ]]; then
+            VALID=true
           else
-            echo "::set-output name=is-valid-branch::false"
-            exit 1
+            VALID=false
           fi
 
+          echo "is-valid-branch=$VALID" >> $GITHUB_OUTPUT
   merge-branches:
     needs: check-branch
+    permissions:
+      contents: write
     if: needs.check-branch.outputs.is-valid-branch == 'true'
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +45,7 @@ jobs:
           git config user.email "$env:GITHUB_ACTOR_ID+$env:GITHUB_ACTOR@users.noreply.github.com"
 
           echo "Merging $SOURCE_BRANCH into $TARGET_BRANCH"
-          
+
           # Checkout the source branch
           git checkout $SOURCE_BRANCH
           git pull origin $SOURCE_BRANCH
