@@ -39,8 +39,11 @@ jobs:
           SOURCE_BRANCH="v${VERSION}"
           TARGET_BRANCH="dev/v${VERSION}"
 
-          echo "Merging $SOURCE_BRANCH into $TARGET_BRANCH"
+          git config user.name "$env:GITHUB_ACTOR"
+          git config user.email "$env:GITHUB_ACTOR_ID+$env:GITHUB_ACTOR@users.noreply.github.com"
 
+          echo "Merging $SOURCE_BRANCH into $TARGET_BRANCH"
+          
           # Checkout the source branch
           git checkout $SOURCE_BRANCH
           git pull origin $SOURCE_BRANCH
