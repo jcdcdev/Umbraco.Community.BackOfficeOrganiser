@@ -40,9 +40,10 @@ jobs:
           VERSION=$(echo "${GITHUB_REF}" | sed -n 's#refs/heads/v\([0-9]\+\)#\1#p')
           SOURCE_BRANCH="v${VERSION}"
           TARGET_BRANCH="dev/v${VERSION}"
+          # Set git config
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
 
-          git config user.name "$env:GITHUB_ACTOR"
-          git config user.email "$env:GITHUB_ACTOR_ID+$env:GITHUB_ACTOR@users.noreply.github.com"
 
           echo "Merging $SOURCE_BRANCH into $TARGET_BRANCH"
 
