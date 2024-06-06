@@ -1,0 +1,53 @@
+name: 🔃 Sync branches
+
+on:
+  push:
+    branches:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    outputs:
+      is-valid-branch: ${{ steps.branch_check.outputs.is-valid-branch }}
+    steps:
+      - name: Check if branch name starts with 'v'
+        id: branch_check
+        run: |
+          BRANCH_NAME=${{ github.ref }}
+          if [[ $BRANCH_NAME == refs/heads/v* ]]; then
+            echo "::set-output name=is-valid-branch::true"
+          else
+            echo "::set-output name=is-valid-branch::false"
+            exit 1
+          fi
+
+  merge-branches:
+    needs: check-branch
+    if: needs.check-branch.outputs.is-valid-branch == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Merge into dev/v**
+        run: |
+          # Extract the version number from the branch name
+          VERSION=$(echo "${GITHUB_REF}" | sed -n 's#refs/heads/v\([0-9]\+\)#\1#p')
+          echo "Merging into dev/v$VERSION"
+
+          # Pull latest of v**
+          git checkout v${VERSION}
+          git pull origin v${VERSION}
+          echo "Pulled latest for v$VERSION"
+
+          # Merge into dev/v**
+          git checkout dev/v${VERSION}
+          git merge v${VERSION} --no-ff -m "Merging v$VERSION into dev/v$VERSION"
+          echo "Merged v$VERSION into dev/v$VERSION"
+
+          # Push changes
+          git push origin dev/v${VERSION}
+          echo "Pushed changes to dev/v$VERSION"
+
