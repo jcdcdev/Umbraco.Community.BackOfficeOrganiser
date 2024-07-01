@@ -10,15 +10,8 @@ namespace Umbraco.Community.BackOfficeOrganiser.Controllers;
 [ApiController]
 [BackOfficeRoute("backofficeorganiser/api")]
 [Authorize(Policy = AuthorizationPolicies.BackOfficeAccess)]
-public class BackOfficeOrganiserController : ControllerBase
+public class BackOfficeOrganiserController(IBackOfficeOrganiserService service) : ControllerBase
 {
-    private readonly IBackOfficeOrganiserService _service;
-
-    public BackOfficeOrganiserController(IBackOfficeOrganiserService service)
-    {
-        _service = service;
-    }
-
     [HttpPost("organise")]
     [Produces(typeof(OrganiseResponse))]
     [Consumes(typeof(OrganiseRequest), "application/json")]
@@ -27,7 +20,7 @@ public class BackOfficeOrganiserController : ControllerBase
         var success = true;
         foreach (var type in model.GetOrganiseTypes())
         {
-            var attempt = await _service.OrganiseAsync(type);
+            var attempt = await service.OrganiseAsync(type);
             if (!attempt.Success)
             {
                 success = false;
