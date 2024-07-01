@@ -5,37 +5,29 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 
-public class DataTypeOrganiser : BackOfficeOrganiserBase<IDataType>
+public class DataTypeOrganiser(
+    ILogger<DataTypeOrganiser> logger,
+    IDataTypeService dataTypeService,
+    DataTypeOrganiseActionCollection organiseActions)
+    : BackOfficeOrganiserBase<IDataType>(logger)
 {
-    private readonly IDataTypeService _dataTypeService;
-    private readonly DataTypeOrganiseActionCollection _organiseActions;
-
-    public DataTypeOrganiser(
-        ILogger<DataTypeOrganiser> logger,
-        IDataTypeService dataTypeService,
-        DataTypeOrganiseActionCollection organiseActions) : base(logger)
-    {
-        _dataTypeService = dataTypeService;
-        _organiseActions = organiseActions;
-    }
-
     protected override async Task OrganiseAsync()
     {
-        var dataTypes = await _dataTypeService.GetAllAsync();
+        var dataTypes = await dataTypeService.GetAllAsync();
         foreach (var dataType in dataTypes)
         {
             await OrganiseAsync(dataType);
         }
 
-        _dataTypeService.DeleteAllEmptyContainers();
+        dataTypeService.DeleteAllEmptyContainers();
     }
 
     public async Task OrganiseAsync(IDataType dataType)
     {
-        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(dataType, _dataTypeService));
+        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(dataType, dataTypeService));
         if (organiser != null)
         {
-            await organiser.MoveAsync(dataType, _dataTypeService);
+            await organiser.MoveAsync(dataType, dataTypeService);
         }
     }
 }

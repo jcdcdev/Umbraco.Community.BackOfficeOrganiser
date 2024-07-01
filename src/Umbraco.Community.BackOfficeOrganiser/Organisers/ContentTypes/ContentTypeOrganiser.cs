@@ -5,37 +5,29 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
 
-public class ContentTypeOrganiser : BackOfficeOrganiserBase<IContentType>
+public class ContentTypeOrganiser(
+    ILogger<ContentTypeOrganiser> logger,
+    IContentTypeService contentTypeService,
+    ContentTypeOrganiseActionCollection organiseActions)
+    : BackOfficeOrganiserBase<IContentType>(logger)
 {
-    private readonly IContentTypeService _contentTypeService;
-    private readonly ContentTypeOrganiseActionCollection _organiseActions;
-
-    public ContentTypeOrganiser(
-        ILogger<ContentTypeOrganiser> logger,
-        IContentTypeService contentTypeService,
-        ContentTypeOrganiseActionCollection organiseActions) : base(logger)
-    {
-        _contentTypeService = contentTypeService;
-        _organiseActions = organiseActions;
-    }
-
     protected override async Task OrganiseAsync()
     {
-        var contentTypes = _contentTypeService.GetAll().ToList();
+        var contentTypes = contentTypeService.GetAll().ToList();
         foreach (var contentType in contentTypes)
         {
             await OrganiseTypeAsync(contentType);
         }
 
-        _contentTypeService.DeleteAllEmptyContainers();
+        contentTypeService.DeleteAllEmptyContainers();
     }
 
     public async Task OrganiseTypeAsync(IContentType contentType)
     {
-        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(contentType, _contentTypeService));
+        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(contentType, contentTypeService));
         if (organiser != null)
         {
-            await organiser.MoveAsync(contentType, _contentTypeService);
+            await organiser.MoveAsync(contentType, contentTypeService);
         }
     }
 }

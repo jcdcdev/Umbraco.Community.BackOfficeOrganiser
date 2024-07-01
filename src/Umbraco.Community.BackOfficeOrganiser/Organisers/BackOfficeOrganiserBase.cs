@@ -2,14 +2,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers;
 
-public abstract class BackOfficeOrganiserBase<T> : IBackOfficeOrganiser<T>
+public abstract class BackOfficeOrganiserBase<T>(ILogger logger) : IBackOfficeOrganiser<T>
 {
-    protected readonly ILogger Logger;
-
-    protected BackOfficeOrganiserBase(ILogger logger)
-    {
-        Logger = logger;
-    }
+    protected readonly ILogger Logger = logger;
 
     public async Task OrganiseTypeAsync()
     {
