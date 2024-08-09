@@ -5,38 +5,25 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
 
-public class MediaTypeOrganiser : BackOfficeOrganiserBase<IMediaType>
+public class MediaTypeOrganiser(
+    ILogger<MediaTypeOrganiser> logger,
+    IMediaTypeService mediaTypeService,
+    MediaTypeOrganiseActionCollection organiseActions)
+    : BackOfficeOrganiserBase<IMediaType>(logger)
 {
-    private readonly IMediaTypeService _mediaTypeService;
-    private readonly MediaTypeOrganiseActionCollection _organiseActions;
+    protected override Task<IEnumerable<IMediaType>> GetAllAsync() => Task.FromResult(mediaTypeService.GetAll());
 
-    public MediaTypeOrganiser(
-        ILogger<MediaTypeOrganiser> logger,
-        IMediaTypeService mediaTypeService,
-        MediaTypeOrganiseActionCollection organiseActions) : base(logger)
+    public override async Task OrganiseAsync(IMediaType mediaType)
     {
-        _mediaTypeService = mediaTypeService;
-        _organiseActions = organiseActions;
-    }
-
-    protected override async Task OrganiseAsync()
-    {
-        var mediaTypes = _mediaTypeService.GetAll().ToList();
-
-        foreach (var mediaType in mediaTypes)
-        {
-            await OrganiseTypeAsync(mediaType);
-        }
-
-        _mediaTypeService.DeleteAllEmptyContainers();
-    }
-
-    public async Task OrganiseTypeAsync(IMediaType mediaType)
-    {
-        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(mediaType, _mediaTypeService));
+        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(mediaType, mediaTypeService));
         if (organiser != null)
         {
-            await organiser.MoveAsync(mediaType, _mediaTypeService);
+            await organiser.MoveAsync(mediaType, mediaTypeService);
         }
+    }
+    
+    protected override void PostOrganiseAll()
+    {
+        mediaTypeService.DeleteAllEmptyContainers();
     }
 }

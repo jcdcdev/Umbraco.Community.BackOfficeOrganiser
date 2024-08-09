@@ -5,38 +5,25 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
-public class MemberTypeOrganiser : BackOfficeOrganiserBase<IMemberType>
+public class MemberTypeOrganiser(
+    ILogger<MemberTypeOrganiser> logger,
+    IMemberTypeService memberTypeService,
+    MemberTypeOrganiseActionCollection organiseActions)
+    : BackOfficeOrganiserBase<IMemberType>(logger)
 {
-    private readonly IMemberTypeService _memberTypeService;
-    private readonly MemberTypeOrganiseActionCollection _organiseActions;
-
-    public MemberTypeOrganiser(
-        ILogger<MemberTypeOrganiser> logger,
-        IMemberTypeService memberTypeService,
-        MemberTypeOrganiseActionCollection organiseActions) : base(logger)
+    public override async Task OrganiseAsync(IMemberType item)
     {
-        _memberTypeService = memberTypeService;
-        _organiseActions = organiseActions;
-    }
-
-    protected override async Task OrganiseAsync()
-    {
-        var memberTypes = _memberTypeService.GetAll().ToList();
-
-        foreach (var memberType in memberTypes)
-        {
-            await OrganiseTypeAsync(memberType);
-        }
-
-        _memberTypeService.DeleteAllEmptyContainers();
-    }
-
-    public async Task OrganiseTypeAsync(IMemberType memberType)
-    {
-        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(memberType, _memberTypeService));
+        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(item, memberTypeService));
         if (organiser != null)
         {
-            await organiser.MoveAsync(memberType, _memberTypeService);
+            await organiser.MoveAsync(item, memberTypeService);
         }
+    }
+
+    protected override Task<IEnumerable<IMemberType>> GetAllAsync() => Task.FromResult<IEnumerable<IMemberType>>(memberTypeService.GetAll().ToList());
+
+    protected override void PostOrganiseAll()
+    {
+        memberTypeService.DeleteAllEmptyContainers();
     }
 }

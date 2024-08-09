@@ -67,7 +67,7 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
     {
         try
         {
-            await _dataTypeOrganiser.OrganiseTypeAsync();
+            await _dataTypeOrganiser.OrganiseAllAsync();
         }
         catch (Exception ex)
         {
@@ -81,7 +81,7 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
     {
         try
         {
-            await _memberTypeOrganiser.OrganiseTypeAsync();
+            await _memberTypeOrganiser.OrganiseAllAsync();
         }
         catch (Exception ex)
         {
@@ -95,7 +95,7 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
     {
         try
         {
-            await _mediaTypeOrganiser.OrganiseTypeAsync();
+            await _mediaTypeOrganiser.OrganiseAllAsync();
         }
         catch (Exception ex)
         {
@@ -109,7 +109,7 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
     {
         try
         {
-            await _contentTypeOrganiser.OrganiseTypeAsync();
+            await _contentTypeOrganiser.OrganiseAllAsync();
         }
         catch (Exception ex)
         {
