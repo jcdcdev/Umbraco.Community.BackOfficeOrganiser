@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Cms.Core.Notifications;
 using Umbraco.Community.BackOfficeOrganiser.Models;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
@@ -30,5 +31,10 @@ public class Composer : IComposer
         builder.ContentTypeOrganiseActions().Append<DefaultContentTypeOrganiseAction>();
         builder.MediaTypeOrganiseActions().Append<DefaultMediaTypeOrganiseAction>();
         builder.MemberTypeOrganiseActions().Append<DefaultMemberTypeOrganiseAction>();
+
+        builder.AddNotificationHandler<DataTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
+        builder.AddNotificationHandler<ContentTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
+        builder.AddNotificationHandler<MemberTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
+        builder.AddNotificationHandler<MediaTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
     }
 }

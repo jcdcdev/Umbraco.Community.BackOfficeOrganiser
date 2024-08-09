@@ -19,16 +19,16 @@ public class MediaTypeOrganiser : BackOfficeOrganiserBase<IMediaType>
         _organiseActions = organiseActions;
     }
 
-    public override void Organise()
+    public override void Organise(IMediaType mediaType)
     {
-        var mediaTypes = _mediaTypeService.GetAll().ToList();
+        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(mediaType, _mediaTypeService));
+        organiser?.Move(mediaType, _mediaTypeService);
+    }
 
-        foreach (var mediaType in mediaTypes)
-        {
-            var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(mediaType, _mediaTypeService));
-            organiser?.Move(mediaType, _mediaTypeService);
-        }
-
+    protected override List<IMediaType> GetAll() => _mediaTypeService.GetAll().ToList();
+    
+    protected override void PostOrganiseAll()
+    {
         _mediaTypeService.DeleteAllEmptyContainers();
     }
 }

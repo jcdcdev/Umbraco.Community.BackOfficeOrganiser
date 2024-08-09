@@ -11,13 +11,22 @@ public abstract class BackOfficeOrganiserBase<T> : IBackOfficeOrganiser<T>
         Logger = logger;
     }
 
-    public void OrganiseType()
+    protected virtual void PostOrganiseAll()
+    {
+    }
+
+    public void OrganiseAll()
     {
         Logger.LogInformation("BackOfficeOrganiser: Cleanup for {Type} Started", typeof(T).Name);
 
         try
         {
-            Organise();
+            var items = GetAll();
+            foreach (var item in items)
+            {
+                Organise(item);
+            }
+            PostOrganiseAll();
         }
         catch (Exception ex)
         {
@@ -28,5 +37,7 @@ public abstract class BackOfficeOrganiserBase<T> : IBackOfficeOrganiser<T>
         Logger.LogInformation("BackOfficeOrganiser: Cleanup for {Type} Complete", typeof(T).Name);
     }
 
-    public abstract void Organise();
+    public abstract void Organise(T item);
+
+    protected abstract List<T> GetAll();
 }
