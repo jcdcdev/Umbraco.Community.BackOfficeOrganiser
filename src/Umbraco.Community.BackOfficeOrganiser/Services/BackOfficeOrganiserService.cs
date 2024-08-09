@@ -65,21 +65,21 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
 
     private void OrganiseDataTypes()
     {
-        _dataTypeOrganiser.OrganiseType();
+        _dataTypeOrganiser.OrganiseAll();
     }
 
     private void OrganiseMemberTypes()
     {
-        _memberTypeOrganiser.OrganiseType();
+        _memberTypeOrganiser.OrganiseAll();
     }
 
     private void OrganiseMediaTypes()
     {
-        _mediaTypeOrganiser.OrganiseType();
+        _mediaTypeOrganiser.OrganiseAll();
     }
 
     private void OrganiseContentTypes()
     {
-        _contentTypeOrganiser.OrganiseType();
+        _contentTypeOrganiser.OrganiseAll();
     }
 }

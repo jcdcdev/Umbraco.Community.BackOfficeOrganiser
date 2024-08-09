@@ -19,16 +19,16 @@ public class ContentTypeOrganiser : BackOfficeOrganiserBase<IContentType>
         _organiseActions = organiseActions;
     }
 
-    public override void Organise()
+    protected override List<IContentType> GetAll() => _contentTypeService.GetAll().ToList();
+
+    public override void Organise(IContentType contentType)
     {
-        var contentTypes = _contentTypeService.GetAll().ToList();
+        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(contentType, _contentTypeService));
+        organiser?.Move(contentType, _contentTypeService);
+    }
 
-        foreach (var contentType in contentTypes)
-        {
-            var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(contentType, _contentTypeService));
-            organiser?.Move(contentType, _contentTypeService);
-        }
-
+    protected override void PostOrganiseAll()
+    {
         _contentTypeService.DeleteAllEmptyContainers();
     }
 }
