@@ -15,22 +15,15 @@ namespace Umbraco.Community.BackOfficeOrganiser.Controllers;
 [Authorize(Policy = AuthorizationPolicies.BackOfficeAccess)]
 [DisableBrowserCache]
 [UmbracoRequireHttps]
-public class BackOfficeOrganiserController : UmbracoApiController
+public class BackOfficeOrganiserController(IBackOfficeOrganiserService service) : UmbracoApiController
 {
-    private readonly IBackOfficeOrganiserService _service;
-
-    public BackOfficeOrganiserController(IBackOfficeOrganiserService service)
-    {
-        _service = service;
-    }
-
     [HttpPost]
     public IActionResult Organise(OrganiseRequest model)
     {
         var success = true;
         foreach (var type in model.Types.Select(DetermineOrganiseType).Distinct())
         {
-            var attempt = _service.Organise(type);
+            var attempt = service.Organise(type);
             if (!attempt.Success)
             {
                 success = false;

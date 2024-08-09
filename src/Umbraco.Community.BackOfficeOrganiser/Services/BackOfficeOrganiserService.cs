@@ -8,27 +8,15 @@ using Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Services;
 
-public class BackOfficeOrganiserService : IBackOfficeOrganiserService
+public class BackOfficeOrganiserService(
+    ILogger<BackOfficeOrganiserService> logger,
+    ContentTypeOrganiser contentTypeOrganiser,
+    MediaTypeOrganiser mediaTypeOrganiser,
+    MemberTypeOrganiser memberTypeOrganiser,
+    DataTypeOrganiser dataTypeOrganiser)
+    : IBackOfficeOrganiserService
 {
-    private readonly ContentTypeOrganiser _contentTypeOrganiser;
-    private readonly DataTypeOrganiser _dataTypeOrganiser;
-    private readonly ILogger _logger;
-    private readonly MediaTypeOrganiser _mediaTypeOrganiser;
-    private readonly MemberTypeOrganiser _memberTypeOrganiser;
-
-    public BackOfficeOrganiserService(
-        ILogger<BackOfficeOrganiserService> logger,
-        ContentTypeOrganiser contentTypeOrganiser,
-        MediaTypeOrganiser mediaTypeOrganiser,
-        MemberTypeOrganiser memberTypeOrganiser,
-        DataTypeOrganiser dataTypeOrganiser)
-    {
-        _logger = logger;
-        _contentTypeOrganiser = contentTypeOrganiser;
-        _mediaTypeOrganiser = mediaTypeOrganiser;
-        _memberTypeOrganiser = memberTypeOrganiser;
-        _dataTypeOrganiser = dataTypeOrganiser;
-    }
+    private readonly ILogger _logger = logger;
 
     public Attempt<OrganiseType> Organise(OrganiseType organise)
     {
@@ -65,21 +53,21 @@ public class BackOfficeOrganiserService : IBackOfficeOrganiserService
 
     private void OrganiseDataTypes()
     {
-        _dataTypeOrganiser.OrganiseAll();
+        dataTypeOrganiser.OrganiseAll();
     }
 
     private void OrganiseMemberTypes()
     {
-        _memberTypeOrganiser.OrganiseAll();
+        memberTypeOrganiser.OrganiseAll();
     }
 
     private void OrganiseMediaTypes()
     {
-        _mediaTypeOrganiser.OrganiseAll();
+        mediaTypeOrganiser.OrganiseAll();
     }
 
     private void OrganiseContentTypes()
     {
-        _contentTypeOrganiser.OrganiseAll();
+        contentTypeOrganiser.OrganiseAll();
     }
 }

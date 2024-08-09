@@ -9,16 +9,10 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 
-public class DefaultDataTypeOrganiseAction : IDataTypeOrganiseAction
+public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> options, ILogger<DefaultDataTypeOrganiseAction> logger) : IDataTypeOrganiseAction
 {
-    private readonly ILogger _logger;
-    private readonly BackOfficeOrganiserOptions _options;
-
-    public DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> options, ILogger<DefaultDataTypeOrganiseAction> logger)
-    {
-        _logger = logger;
-        _options = options.Value;
-    }
+    private readonly ILogger _logger = logger;
+    private readonly BackOfficeOrganiserOptions _options = options.Value;
 
     public bool CanMove(IDataType dataType, IDataTypeService dataTypeService) => true;
 

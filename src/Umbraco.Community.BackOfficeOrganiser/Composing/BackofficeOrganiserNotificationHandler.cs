@@ -9,31 +9,19 @@ using Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Composing;
 
-public class BackofficeOrganiserNotificationHandler :
-    INotificationHandler<DataTypeSavedNotification>,
-    INotificationHandler<ContentTypeSavedNotification>,
-    INotificationHandler<MemberTypeSavedNotification>,
-    INotificationHandler<MediaTypeSavedNotification>
+public class BackofficeOrganiserNotificationHandler(
+    DataTypeOrganiser dataTypeOrganiser,
+    ContentTypeOrganiser contentTypeOrganiser,
+    MediaTypeOrganiser mediaTypeOrganiser,
+    MemberTypeOrganiser memberTypeOrganiser,
+    IOptions<BackOfficeOrganiserOptions> options)
+    :
+        INotificationHandler<DataTypeSavedNotification>,
+        INotificationHandler<ContentTypeSavedNotification>,
+        INotificationHandler<MemberTypeSavedNotification>,
+        INotificationHandler<MediaTypeSavedNotification>
 {
-    private readonly ContentTypeOrganiser _contentTypeOrganiser;
-    private readonly DataTypeOrganiser _dataTypeOrganiser;
-    private readonly MediaTypeOrganiser _mediaTypeOrganiser;
-    private readonly MemberTypeOrganiser _memberTypeOrganiser;
-    private readonly BackOfficeOrganiserOptions _options;
-
-    public BackofficeOrganiserNotificationHandler(
-        DataTypeOrganiser dataTypeOrganiser,
-        ContentTypeOrganiser contentTypeOrganiser,
-        MediaTypeOrganiser mediaTypeOrganiser,
-        MemberTypeOrganiser memberTypeOrganiser,
-        IOptions<BackOfficeOrganiserOptions> options)
-    {
-        _dataTypeOrganiser = dataTypeOrganiser;
-        _contentTypeOrganiser = contentTypeOrganiser;
-        _mediaTypeOrganiser = mediaTypeOrganiser;
-        _memberTypeOrganiser = memberTypeOrganiser;
-        _options = options.Value;
-    }
+    private readonly BackOfficeOrganiserOptions _options = options.Value;
 
     public void Handle(ContentTypeSavedNotification notification)
     {
@@ -44,7 +32,7 @@ public class BackofficeOrganiserNotificationHandler :
 
         foreach (var item in notification.SavedEntities)
         {
-            _contentTypeOrganiser.Organise(item);
+            contentTypeOrganiser.Organise(item);
         }
     }
 
@@ -57,7 +45,7 @@ public class BackofficeOrganiserNotificationHandler :
 
         foreach (var dataType in notification.SavedEntities)
         {
-            _dataTypeOrganiser.Organise(dataType);
+            dataTypeOrganiser.Organise(dataType);
         }
     }
 
@@ -70,7 +58,7 @@ public class BackofficeOrganiserNotificationHandler :
 
         foreach (var item in notification.SavedEntities)
         {
-            _mediaTypeOrganiser.Organise(item);
+            mediaTypeOrganiser.Organise(item);
         }
     }
 
@@ -83,7 +71,7 @@ public class BackofficeOrganiserNotificationHandler :
 
         foreach (var item in notification.SavedEntities)
         {
-            _memberTypeOrganiser.Organise(item);
+            memberTypeOrganiser.Organise(item);
         }
     }
 }
