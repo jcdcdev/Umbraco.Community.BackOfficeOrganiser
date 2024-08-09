@@ -28,6 +28,7 @@ public class Composer : IComposer
         builder.ManifestFilters().Append<ManifestFilter>();
 
         builder.DataTypeOrganiseActions().Append<DefaultDataTypeOrganiseAction>();
+        builder.ContentTypeOrganiseActions().Append<ElementTypeOrganiser>();
         builder.ContentTypeOrganiseActions().Append<DefaultContentTypeOrganiseAction>();
         builder.MediaTypeOrganiseActions().Append<DefaultMediaTypeOrganiseAction>();
         builder.MemberTypeOrganiseActions().Append<DefaultMemberTypeOrganiseAction>();
