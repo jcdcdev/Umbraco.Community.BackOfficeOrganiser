@@ -9,31 +9,19 @@ using Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Composing;
 
-public class BackofficeOrganiserNotificationHandler :
-    INotificationAsyncHandler<DataTypeSavedNotification>,
-    INotificationAsyncHandler<ContentTypeSavedNotification>,
-    INotificationAsyncHandler<MemberTypeSavedNotification>,
-    INotificationAsyncHandler<MediaTypeSavedNotification>
+public class BackofficeOrganiserNotificationHandler(
+    DataTypeOrganiser dataTypeOrganiser,
+    ContentTypeOrganiser contentTypeOrganiser,
+    MediaTypeOrganiser mediaTypeOrganiser,
+    MemberTypeOrganiser memberTypeOrganiser,
+    IOptions<BackOfficeOrganiserOptions> options)
+    :
+        INotificationAsyncHandler<DataTypeSavedNotification>,
+        INotificationAsyncHandler<ContentTypeSavedNotification>,
+        INotificationAsyncHandler<MemberTypeSavedNotification>,
+        INotificationAsyncHandler<MediaTypeSavedNotification>
 {
-    private readonly ContentTypeOrganiser _contentTypeOrganiser;
-    private readonly DataTypeOrganiser _dataTypeOrganiser;
-    private readonly MediaTypeOrganiser _mediaTypeOrganiser;
-    private readonly MemberTypeOrganiser _memberTypeOrganiser;
-    private readonly BackOfficeOrganiserOptions _options;
-
-    public BackofficeOrganiserNotificationHandler(
-        DataTypeOrganiser dataTypeOrganiser,
-        ContentTypeOrganiser contentTypeOrganiser,
-        MediaTypeOrganiser mediaTypeOrganiser,
-        MemberTypeOrganiser memberTypeOrganiser,
-        IOptions<BackOfficeOrganiserOptions> options)
-    {
-        _dataTypeOrganiser = dataTypeOrganiser;
-        _contentTypeOrganiser = contentTypeOrganiser;
-        _mediaTypeOrganiser = mediaTypeOrganiser;
-        _memberTypeOrganiser = memberTypeOrganiser;
-        _options = options.Value;
-    }
+    private readonly BackOfficeOrganiserOptions _options = options.Value;
 
     public async Task HandleAsync(ContentTypeSavedNotification notification, CancellationToken cancellationToken)
     {
@@ -44,7 +32,7 @@ public class BackofficeOrganiserNotificationHandler :
 
         foreach (var item in notification.SavedEntities)
         {
-            await _contentTypeOrganiser.OrganiseTypeAsync(item);
+            await contentTypeOrganiser.OrganiseTypeAsync(item);
         }
     }
 
@@ -57,7 +45,7 @@ public class BackofficeOrganiserNotificationHandler :
 
         foreach (var dataType in notification.SavedEntities)
         {
-            await _dataTypeOrganiser.OrganiseAsync(dataType);
+            await dataTypeOrganiser.OrganiseAsync(dataType);
         }
     }
 
@@ -70,7 +58,7 @@ public class BackofficeOrganiserNotificationHandler :
 
         foreach (var item in notification.SavedEntities)
         {
-            await _mediaTypeOrganiser.OrganiseTypeAsync(item);
+            await mediaTypeOrganiser.OrganiseTypeAsync(item);
         }
     }
 
@@ -83,7 +71,7 @@ public class BackofficeOrganiserNotificationHandler :
 
         foreach (var item in notification.SavedEntities)
         {
-            await _memberTypeOrganiser.OrganiseTypeAsync(item);
+            await memberTypeOrganiser.OrganiseTypeAsync(item);
         }
     }
 }
