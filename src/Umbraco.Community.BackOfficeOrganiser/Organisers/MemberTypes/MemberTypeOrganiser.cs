@@ -19,16 +19,16 @@ public class MemberTypeOrganiser : BackOfficeOrganiserBase<IMemberType>
         _organiseActions = organiseActions;
     }
 
-    public override void Organise()
+    public override void Organise(IMemberType item)
     {
-        var memberTypes = _memberTypeService.GetAll().ToList();
+        var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(item, _memberTypeService));
+        organiser?.Move(item, _memberTypeService);
+    }
 
-        foreach (var memberType in memberTypes)
-        {
-            var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(memberType, _memberTypeService));
-            organiser?.Move(memberType, _memberTypeService);
-        }
+    protected override List<IMemberType> GetAll() => _memberTypeService.GetAll().ToList();
 
+    protected override void PostOrganiseAll()
+    {
         _memberTypeService.DeleteAllEmptyContainers();
     }
 }
