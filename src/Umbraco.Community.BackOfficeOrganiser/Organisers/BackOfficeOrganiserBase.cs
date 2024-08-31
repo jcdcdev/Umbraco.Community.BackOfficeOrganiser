@@ -1,18 +1,29 @@
 using Microsoft.Extensions.Logging;
+using Umbraco.Cms.Core.Models;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers;
 
 public abstract class BackOfficeOrganiserBase<T>(ILogger logger) : IBackOfficeOrganiser<T>
 {
-    protected readonly ILogger Logger = logger;
+    public readonly ILogger Logger = logger;
 
-    public async Task OrganiseTypeAsync()
+    protected virtual void PostOrganiseAll()
+    {
+    }
+
+    public async Task OrganiseAllAsync()
     {
         Logger.LogInformation("BackOfficeOrganiser: Cleanup for {Type} Started", typeof(T).Name);
 
         try
         {
-            await OrganiseAsync();
+            var items = await GetAllAsync();
+            foreach (var item in items)
+            {
+                await OrganiseAsync(item);
+            }
+
+            PostOrganiseAll();
         }
         catch (Exception ex)
         {
@@ -23,5 +34,7 @@ public abstract class BackOfficeOrganiserBase<T>(ILogger logger) : IBackOfficeOr
         Logger.LogInformation("BackOfficeOrganiser: Cleanup for {Type} Complete", typeof(T).Name);
     }
 
-    protected abstract Task OrganiseAsync();
+    public abstract Task OrganiseAsync(T item);
+
+    protected abstract Task<IEnumerable<T>> GetAllAsync();
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using jcdcdev.Umbraco.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
@@ -11,23 +12,19 @@ public class ContentTypeOrganiser(
     ContentTypeOrganiseActionCollection organiseActions)
     : BackOfficeOrganiserBase<IContentType>(logger)
 {
-    protected override async Task OrganiseAsync()
-    {
-        var contentTypes = contentTypeService.GetAll().ToList();
-        foreach (var contentType in contentTypes)
-        {
-            await OrganiseTypeAsync(contentType);
-        }
+    protected override Task<IEnumerable<IContentType>> GetAllAsync() => Task.FromResult(contentTypeService.GetAll());
 
-        contentTypeService.DeleteAllEmptyContainers();
-    }
-
-    public async Task OrganiseTypeAsync(IContentType contentType)
+    public override async Task OrganiseAsync(IContentType contentType)
     {
         var organiser = organiseActions.FirstOrDefault(x => x.CanMove(contentType, contentTypeService));
         if (organiser != null)
         {
             await organiser.MoveAsync(contentType, contentTypeService);
         }
+    }
+
+    protected override void PostOrganiseAll()
+    {
+        contentTypeService.DeleteAllEmptyContainers();
     }
 }

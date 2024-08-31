@@ -8,15 +8,27 @@ using Umbraco.Community.BackOfficeOrganiser.Organisers.MemberTypes;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Services;
 
-public class BackOfficeOrganiserService(
-    ILogger<BackOfficeOrganiserService> logger,
-    ContentTypeOrganiser contentTypeOrganiser,
-    MediaTypeOrganiser mediaTypeOrganiser,
-    MemberTypeOrganiser memberTypeOrganiser,
-    DataTypeOrganiser dataTypeOrganiser)
-    : IBackOfficeOrganiserService
+public class BackOfficeOrganiserService : IBackOfficeOrganiserService
 {
-    private readonly ILogger _logger = logger;
+    private readonly ContentTypeOrganiser _contentTypeOrganiser;
+    private readonly DataTypeOrganiser _dataTypeOrganiser;
+    private readonly ILogger _logger;
+    private readonly MediaTypeOrganiser _mediaTypeOrganiser;
+    private readonly MemberTypeOrganiser _memberTypeOrganiser;
+
+    public BackOfficeOrganiserService(
+        ILogger<BackOfficeOrganiserService> logger,
+        ContentTypeOrganiser contentTypeOrganiser,
+        MediaTypeOrganiser mediaTypeOrganiser,
+        MemberTypeOrganiser memberTypeOrganiser,
+        DataTypeOrganiser dataTypeOrganiser)
+    {
+        _logger = logger;
+        _contentTypeOrganiser = contentTypeOrganiser;
+        _mediaTypeOrganiser = mediaTypeOrganiser;
+        _memberTypeOrganiser = memberTypeOrganiser;
+        _dataTypeOrganiser = dataTypeOrganiser;
+    }
 
     public async Task<Attempt<OrganiseType>> OrganiseAsync(OrganiseType organise)
     {
@@ -55,7 +67,7 @@ public class BackOfficeOrganiserService(
     {
         try
         {
-            await dataTypeOrganiser.OrganiseTypeAsync();
+            await _dataTypeOrganiser.OrganiseAllAsync();
         }
         catch (Exception ex)
         {
@@ -69,7 +81,7 @@ public class BackOfficeOrganiserService(
     {
         try
         {
-            await memberTypeOrganiser.OrganiseTypeAsync();
+            await _memberTypeOrganiser.OrganiseAllAsync();
         }
         catch (Exception ex)
         {
@@ -83,7 +95,7 @@ public class BackOfficeOrganiserService(
     {
         try
         {
-            await mediaTypeOrganiser.OrganiseTypeAsync();
+            await _mediaTypeOrganiser.OrganiseAllAsync();
         }
         catch (Exception ex)
         {
@@ -97,7 +109,7 @@ public class BackOfficeOrganiserService(
     {
         try
         {
-            await contentTypeOrganiser.OrganiseTypeAsync();
+            await _contentTypeOrganiser.OrganiseAllAsync();
         }
         catch (Exception ex)
         {

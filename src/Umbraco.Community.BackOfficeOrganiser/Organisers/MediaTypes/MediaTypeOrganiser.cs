@@ -11,24 +11,19 @@ public class MediaTypeOrganiser(
     MediaTypeOrganiseActionCollection organiseActions)
     : BackOfficeOrganiserBase<IMediaType>(logger)
 {
-    protected override async Task OrganiseAsync()
-    {
-        var mediaTypes = mediaTypeService.GetAll().ToList();
+    protected override Task<IEnumerable<IMediaType>> GetAllAsync() => Task.FromResult(mediaTypeService.GetAll());
 
-        foreach (var mediaType in mediaTypes)
-        {
-            await OrganiseTypeAsync(mediaType);
-        }
-
-        mediaTypeService.DeleteAllEmptyContainers();
-    }
-
-    public async Task OrganiseTypeAsync(IMediaType mediaType)
+    public override async Task OrganiseAsync(IMediaType mediaType)
     {
         var organiser = organiseActions.FirstOrDefault(x => x.CanMove(mediaType, mediaTypeService));
         if (organiser != null)
         {
             await organiser.MoveAsync(mediaType, mediaTypeService);
         }
+    }
+    
+    protected override void PostOrganiseAll()
+    {
+        mediaTypeService.DeleteAllEmptyContainers();
     }
 }

@@ -11,24 +11,19 @@ public class MemberTypeOrganiser(
     MemberTypeOrganiseActionCollection organiseActions)
     : BackOfficeOrganiserBase<IMemberType>(logger)
 {
-    protected override async Task OrganiseAsync()
+    public override async Task OrganiseAsync(IMemberType item)
     {
-        var memberTypes = memberTypeService.GetAll().ToList();
-
-        foreach (var memberType in memberTypes)
-        {
-            await OrganiseTypeAsync(memberType);
-        }
-
-        memberTypeService.DeleteAllEmptyContainers();
-    }
-
-    public async Task OrganiseTypeAsync(IMemberType memberType)
-    {
-        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(memberType, memberTypeService));
+        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(item, memberTypeService));
         if (organiser != null)
         {
-            await organiser.MoveAsync(memberType, memberTypeService);
+            await organiser.MoveAsync(item, memberTypeService);
         }
+    }
+
+    protected override Task<IEnumerable<IMemberType>> GetAllAsync() => Task.FromResult<IEnumerable<IMemberType>>(memberTypeService.GetAll().ToList());
+
+    protected override void PostOrganiseAll()
+    {
+        memberTypeService.DeleteAllEmptyContainers();
     }
 }

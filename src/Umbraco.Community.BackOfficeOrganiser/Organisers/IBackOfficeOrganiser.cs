@@ -2,5 +2,6 @@ namespace Umbraco.Community.BackOfficeOrganiser.Organisers;
 
 public interface IBackOfficeOrganiser<T>
 {
-    Task OrganiseTypeAsync();
+    Task OrganiseAllAsync();
+    Task OrganiseAsync(T item);
 }

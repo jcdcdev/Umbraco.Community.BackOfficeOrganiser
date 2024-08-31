@@ -11,23 +11,19 @@ public class DataTypeOrganiser(
     DataTypeOrganiseActionCollection organiseActions)
     : BackOfficeOrganiserBase<IDataType>(logger)
 {
-    protected override async Task OrganiseAsync()
-    {
-        var dataTypes = await dataTypeService.GetAllAsync();
-        foreach (var dataType in dataTypes)
-        {
-            await OrganiseAsync(dataType);
-        }
-
-        dataTypeService.DeleteAllEmptyContainers();
-    }
-
-    public async Task OrganiseAsync(IDataType dataType)
+    public override async Task OrganiseAsync(IDataType dataType)
     {
         var organiser = organiseActions.FirstOrDefault(x => x.CanMove(dataType, dataTypeService));
         if (organiser != null)
         {
             await organiser.MoveAsync(dataType, dataTypeService);
         }
+    }
+
+    protected override async Task<IEnumerable<IDataType>> GetAllAsync() => await dataTypeService.GetAllAsync();
+
+    protected override void PostOrganiseAll()
+    {
+        dataTypeService.DeleteAllEmptyContainers();
     }
 }

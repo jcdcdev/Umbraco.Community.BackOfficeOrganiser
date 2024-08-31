@@ -32,7 +32,7 @@ public class BackofficeOrganiserNotificationHandler(
 
         foreach (var item in notification.SavedEntities)
         {
-            await contentTypeOrganiser.OrganiseTypeAsync(item);
+            await contentTypeOrganiser.OrganiseAsync(item);
         }
     }
 
@@ -58,7 +58,7 @@ public class BackofficeOrganiserNotificationHandler(
 
         foreach (var item in notification.SavedEntities)
         {
-            await mediaTypeOrganiser.OrganiseTypeAsync(item);
+            await mediaTypeOrganiser.OrganiseAsync(item);
         }
     }
 
@@ -71,7 +71,7 @@ public class BackofficeOrganiserNotificationHandler(
 
         foreach (var item in notification.SavedEntities)
         {
-            await memberTypeOrganiser.OrganiseTypeAsync(item);
+            await memberTypeOrganiser.OrganiseAsync(item);
         }
     }
 }
