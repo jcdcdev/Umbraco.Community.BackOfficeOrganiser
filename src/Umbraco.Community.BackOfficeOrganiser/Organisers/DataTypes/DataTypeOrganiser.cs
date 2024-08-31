@@ -5,30 +5,22 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 
-public class DataTypeOrganiser : BackOfficeOrganiserBase<IDataType>
+public class DataTypeOrganiser(
+    ILogger<DataTypeOrganiser> logger,
+    IDataTypeService dataTypeService,
+    DataTypeOrganiseActionCollection organiseActions)
+    : BackOfficeOrganiserBase<IDataType>(logger)
 {
-    private readonly IDataTypeService _dataTypeService;
-    private readonly DataTypeOrganiseActionCollection _organiseActions;
-
-    public DataTypeOrganiser(
-        ILogger<DataTypeOrganiser> logger,
-        IDataTypeService dataTypeService,
-        DataTypeOrganiseActionCollection organiseActions) : base(logger)
+    public override void Organise(IDataType dataType)
     {
-        _dataTypeService = dataTypeService;
-        _organiseActions = organiseActions;
+        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(dataType, dataTypeService));
+        organiser?.Move(dataType, dataTypeService);
     }
 
-    public override void Organise()
+    protected override List<IDataType> GetAll() => dataTypeService.GetAll().ToList();
+    
+    protected override void PostOrganiseAll()
     {
-        var dataTypes = _dataTypeService.GetAll().ToList();
-
-        foreach (var dataType in dataTypes)
-        {
-            var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(dataType, _dataTypeService));
-            organiser?.Move(dataType, _dataTypeService);
-        }
-
-        _dataTypeService.DeleteAllEmptyContainers();
+        dataTypeService.DeleteAllEmptyContainers();
     }
 }

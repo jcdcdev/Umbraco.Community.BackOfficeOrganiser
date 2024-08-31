@@ -5,30 +5,22 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Organisers.MediaTypes;
 
-public class MediaTypeOrganiser : BackOfficeOrganiserBase<IMediaType>
+public class MediaTypeOrganiser(
+    ILogger<MediaTypeOrganiser> logger,
+    IMediaTypeService mediaTypeService,
+    MediaTypeOrganiseActionCollection organiseActions)
+    : BackOfficeOrganiserBase<IMediaType>(logger)
 {
-    private readonly IMediaTypeService _mediaTypeService;
-    private readonly MediaTypeOrganiseActionCollection _organiseActions;
-
-    public MediaTypeOrganiser(
-        ILogger<MediaTypeOrganiser> logger,
-        IMediaTypeService mediaTypeService,
-        MediaTypeOrganiseActionCollection organiseActions) : base(logger)
+    public override void Organise(IMediaType mediaType)
     {
-        _mediaTypeService = mediaTypeService;
-        _organiseActions = organiseActions;
+        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(mediaType, mediaTypeService));
+        organiser?.Move(mediaType, mediaTypeService);
     }
 
-    public override void Organise()
+    protected override List<IMediaType> GetAll() => mediaTypeService.GetAll().ToList();
+    
+    protected override void PostOrganiseAll()
     {
-        var mediaTypes = _mediaTypeService.GetAll().ToList();
-
-        foreach (var mediaType in mediaTypes)
-        {
-            var organiser = _organiseActions.FirstOrDefault(x => x.CanMove(mediaType, _mediaTypeService));
-            organiser?.Move(mediaType, _mediaTypeService);
-        }
-
-        _mediaTypeService.DeleteAllEmptyContainers();
+        mediaTypeService.DeleteAllEmptyContainers();
     }
 }
