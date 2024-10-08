@@ -4,7 +4,7 @@ using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 
-namespace TestSite.Fourteen;
+namespace TestSite;
 
 public class ExampleDataTypeOrganiseAction : IDataTypeOrganiseAction
 {

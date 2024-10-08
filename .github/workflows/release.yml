@@ -18,7 +18,8 @@ jobs:
           project-path: src/Umbraco.Community.BackOfficeOrganiser/Umbraco.Community.BackOfficeOrganiser.csproj
           npm-working-dir: src/Umbraco.Community.BackOfficeOrganiser.Client
           npm-enabled: true
-          umbraco-version: 14
+          umbraco-version: 15
+          dotnet-version: "9"
       - name: Release
         uses: jcdcdev/jcdcdev.Umbraco.GitHub.Release@main
         with:

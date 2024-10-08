@@ -99,7 +99,9 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
             Constants.PropertyEditors.Aliases.EmailAddress => "Text",
             Constants.PropertyEditors.Aliases.Label => "Text",
 
+#pragma warning disable CS0618 // Type or member is obsolete
             Constants.PropertyEditors.Aliases.TinyMce => "Rich Text",
+#pragma warning restore CS0618 // Type or member is obsolete
             Constants.PropertyEditors.Aliases.RichText => "Rich Text",
             Constants.PropertyEditors.Aliases.MarkdownEditor => "Rich Text",
 
