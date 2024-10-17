@@ -8,15 +8,16 @@ namespace Umbraco.Community.BackOfficeOrganiser.Organisers.DataTypes;
 public class DataTypeOrganiser(
     ILogger<DataTypeOrganiser> logger,
     IDataTypeService dataTypeService,
+    IDataTypeContainerService dataTypeContainerService,
     DataTypeOrganiseActionCollection organiseActions)
     : BackOfficeOrganiserBase<IDataType>(logger)
 {
     public override async Task OrganiseAsync(IDataType dataType)
     {
-        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(dataType, dataTypeService));
+        var organiser = organiseActions.FirstOrDefault(x => x.CanMove(dataType, dataTypeService, dataTypeContainerService));
         if (organiser != null)
         {
-            await organiser.MoveAsync(dataType, dataTypeService);
+            await organiser.MoveAsync(dataType, dataTypeService, dataTypeContainerService);
         }
     }
 

@@ -14,9 +14,9 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
     private readonly ILogger _logger = logger;
     private readonly BackOfficeOrganiserOptions _options = options.Value;
 
-    public bool CanMove(IDataType dataType, IDataTypeService dataTypeService) => true;
+    public bool CanMove(IDataType dataType, IDataTypeService dataTypeService, IDataTypeContainerService dataTypeContainerService) => true;
 
-    public async Task MoveAsync(IDataType dataType, IDataTypeService dataTypeService)
+    public async Task MoveAsync(IDataType dataType, IDataTypeService dataTypeService, IDataTypeContainerService dataTypeContainerService)
     {
         string internalFolder;
         if (dataType.IsInternalUmbracoEditor())
