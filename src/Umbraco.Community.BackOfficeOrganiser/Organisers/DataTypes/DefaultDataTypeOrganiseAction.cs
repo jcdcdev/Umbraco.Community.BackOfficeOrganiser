@@ -14,9 +14,9 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
     private readonly ILogger _logger = logger;
     private readonly BackOfficeOrganiserOptions _options = options.Value;
 
-    public bool CanMove(IDataType dataType, IDataTypeService dataTypeService) => true;
+    public bool CanMove(IDataType dataType, IDataTypeService dataTypeService, IDataTypeContainerService dataTypeContainerService) => true;
 
-    public async Task MoveAsync(IDataType dataType, IDataTypeService dataTypeService)
+    public async Task MoveAsync(IDataType dataType, IDataTypeService dataTypeService, IDataTypeContainerService dataTypeContainerService)
     {
         string internalFolder;
         if (dataType.IsInternalUmbracoEditor())
@@ -99,7 +99,9 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
             Constants.PropertyEditors.Aliases.EmailAddress => "Text",
             Constants.PropertyEditors.Aliases.Label => "Text",
 
+#pragma warning disable CS0618 // Type or member is obsolete
             Constants.PropertyEditors.Aliases.TinyMce => "Rich Text",
+#pragma warning restore CS0618 // Type or member is obsolete
             Constants.PropertyEditors.Aliases.RichText => "Rich Text",
             Constants.PropertyEditors.Aliases.MarkdownEditor => "Rich Text",
 

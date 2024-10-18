@@ -1,6 +1,6 @@
 {
 	"$schema": "umbraco-package-schema.json",
-	"version": "14.0.0",
+	"version": "15.0.0",
 	"name": "Backoffice Organiser",
 	"extensions": [
 		{
