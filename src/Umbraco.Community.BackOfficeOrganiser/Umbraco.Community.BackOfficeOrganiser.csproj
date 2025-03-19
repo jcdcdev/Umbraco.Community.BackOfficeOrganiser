@@ -24,7 +24,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="jcdcdev.Umbraco.Core" Version="13.0.1"/>
-		<PackageReference Include="Umbraco.Community.SimpleDashboards" Version="13.0.0"/>
+		<PackageReference Include="Umbraco.Community.SimpleDashboards" Version="14.0.0"/>
 		<PackageReference Include="Umbraco.Cms.Core" Version="[13.0.0,14.0.0)"/>
 		<PackageReference Include="Umbraco.Cms.Infrastructure" Version="[13.0.0,14.0.0)"/>
 	</ItemGroup>
