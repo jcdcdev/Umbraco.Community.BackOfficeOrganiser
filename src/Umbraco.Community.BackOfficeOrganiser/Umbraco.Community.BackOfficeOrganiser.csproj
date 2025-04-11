@@ -24,7 +24,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Umbraco.Cms.Api.Common" Version="15.0.0"/>
-		<PackageReference Include="Umbraco.Cms.Api.Management" Version="15.0.0"/>
+		<PackageReference Include="Umbraco.Cms.Api.Management" Version="15.3.1"/>
 		<PackageReference Include="Umbraco.Cms.Core" Version="[15.0.0,16.0.0)"/>
 		<PackageReference Include="Umbraco.Cms.Infrastructure" Version="[15.0.0,16.0.0)"/>
 		<PackageReference Include="jcdcdev.Umbraco.Core" Version="[15.2.0,16.0.0)"/>
