@@ -26,8 +26,9 @@ public class MediaTypeOrganiser(
 
     public override IEnumerable<IOrganiseAction> GetOrganiseActions() => organiseActions;
 
-    protected async override Task PostOrganiseAll()
+    protected override Task PostOrganiseAll()
     {
         mediaTypeService.DeleteAllEmptyContainers();
+        return Task.CompletedTask;
     }
 }

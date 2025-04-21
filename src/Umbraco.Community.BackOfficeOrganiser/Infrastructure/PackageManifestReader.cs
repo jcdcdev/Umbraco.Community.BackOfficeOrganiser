@@ -1,17 +1,14 @@
 using jcdcdev.Umbraco.Core.Extensions;
 using jcdcdev.Umbraco.Core.Web.Models.Manifests;
-using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Manifest;
 using Umbraco.Cms.Infrastructure.Manifest;
 using Umbraco.Community.BackOfficeOrganiser.Core;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Infrastructure;
 
-public class PackageManifestReader(
-    ILogger<PackageManifestReader> logger)
-    : IPackageManifestReader
+public class PackageManifestReader : IPackageManifestReader
 {
-    public async Task<IEnumerable<PackageManifest>> ReadPackageManifestsAsync()
+    public Task<IEnumerable<PackageManifest>> ReadPackageManifestsAsync()
     {
         var extensions = new List<IManifest>();
         var packageManifest = new PackageManifest
@@ -31,6 +28,6 @@ public class PackageManifestReader(
         });
 
         packageManifest.Extensions = extensions.OfType<object>().ToArray();
-        return [packageManifest];
+        return Task.FromResult<IEnumerable<PackageManifest>>([packageManifest]);
     }
 }

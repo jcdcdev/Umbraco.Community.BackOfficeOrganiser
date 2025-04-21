@@ -26,8 +26,9 @@ public class ContentTypeOrganiser(
 
     public override IEnumerable<IOrganiseAction> GetOrganiseActions() => organiseActions;
 
-    protected override async Task PostOrganiseAll()
+    protected override Task PostOrganiseAll()
     {
         contentTypeService.DeleteAllEmptyContainers();
+        return Task.CompletedTask;
     }
 }
