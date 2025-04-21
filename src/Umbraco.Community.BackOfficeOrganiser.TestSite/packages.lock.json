@@ -2962,8 +2962,8 @@
       "umbraco.community.backofficeorganiser": {
         "type": "Project",
         "dependencies": {
-          "Umbraco.Cms.Api.Common": "[15.0.0, )",
-          "Umbraco.Cms.Api.Management": "[15.0.0, )",
+          "Umbraco.Cms.Api.Common": "[15.0.0, 16.0.0)",
+          "Umbraco.Cms.Api.Management": "[15.0.0, 16.0.0)",
           "Umbraco.Cms.Core": "[15.0.0, 16.0.0)",
           "Umbraco.Cms.Infrastructure": "[15.0.0, 16.0.0)",
           "jcdcdev.Umbraco.Core": "[15.2.0, 16.0.0)"

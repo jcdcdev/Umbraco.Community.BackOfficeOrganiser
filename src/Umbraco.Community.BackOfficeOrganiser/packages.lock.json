@@ -13,7 +13,7 @@
       },
       "Umbraco.Cms.Api.Common": {
         "type": "Direct",
-        "requested": "[15.0.0, )",
+        "requested": "[15.0.0, 16.0.0)",
         "resolved": "15.0.0",
         "contentHash": "YgDChm+HOl82N4HHucShOWw8z/sZmvCLeC3AlQvUkl9ZBCjIts6piwYGHWuoNYK4Z1SmOzlM/JI4b9rScRAglQ==",
         "dependencies": {
@@ -29,7 +29,7 @@
       },
       "Umbraco.Cms.Api.Management": {
         "type": "Direct",
-        "requested": "[15.0.0, )",
+        "requested": "[15.0.0, 16.0.0)",
         "resolved": "15.0.0",
         "contentHash": "3p5CZoz8nuIsUDX/e53Ig725s8DUEfDtF1SSW++RhCjHbEYESp0COegKhcYPK+vzARNEzhAYZESAy6CpsJysWA==",
         "dependencies": {
