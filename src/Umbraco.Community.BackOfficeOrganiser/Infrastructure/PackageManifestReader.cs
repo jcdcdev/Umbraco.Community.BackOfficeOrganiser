@@ -1,8 +1,8 @@
+using System.Reflection;
 using jcdcdev.Umbraco.Core.Extensions;
 using jcdcdev.Umbraco.Core.Web.Models.Manifests;
 using Umbraco.Cms.Core.Manifest;
 using Umbraco.Cms.Infrastructure.Manifest;
-using Umbraco.Community.BackOfficeOrganiser.Core;
 
 namespace Umbraco.Community.BackOfficeOrganiser.Infrastructure;
 
@@ -14,7 +14,7 @@ public class PackageManifestReader : IPackageManifestReader
         var packageManifest = new PackageManifest
         {
             Name = Constants.PackageName,
-            Version = EnvironmentExtensions.CurrentAssemblyVersion().ToSemVer()?.ToString() ?? "0.1.0",
+            Version = Assembly.GetAssembly(typeof(PackageManifestReader))?.GetName().Version?.ToSemVer()?.ToString() ?? "0.1.0",
             AllowPublicAccess = false,
             AllowTelemetry = true,
             Extensions = []
