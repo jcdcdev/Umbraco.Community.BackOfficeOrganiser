@@ -357,3 +357,4 @@ src/.idea
 *.sqlite.db*
 /src/Umbraco.Community.BackOfficeOrganiser/.idea/
 /src/Umbraco.Community.BackOfficeOrganiser/wwwroot/App_Plugins/Umbraco.Community.BackOfficeOrganiser/dist
+/src/*.TestSite/umbraco/Data/TEMP
