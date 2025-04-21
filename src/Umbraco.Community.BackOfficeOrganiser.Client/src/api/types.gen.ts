@@ -2,6 +2,14 @@
 
 export type EventMessageTypeModel = 'Default' | 'Info' | 'Error' | 'Success' | 'Warning';
 
+export const EventMessageTypeModel = {
+    DEFAULT: 'Default',
+    INFO: 'Info',
+    ERROR: 'Error',
+    SUCCESS: 'Success',
+    WARNING: 'Warning'
+} as const;
+
 export type NotificationHeaderModel = {
     message: string;
     category: string;
