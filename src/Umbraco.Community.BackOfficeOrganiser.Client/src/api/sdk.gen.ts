@@ -8,12 +8,14 @@ import type { PostUmbracoBackofficeorganiserApiOrganiseData, PostUmbracoBackoffi
 /**
  * @param data The data for the request.
  * @param data.requestBody
- * @returns unknown Success
+ * @returns unknown OK
  * @throws ApiError
  */
-export const postUmbracoBackofficeorganiserApiOrganise = (data: PostUmbracoBackofficeorganiserApiOrganiseData = {}): CancelablePromise<PostUmbracoBackofficeorganiserApiOrganiseResponse> => { return __request(OpenAPI, {
-    method: 'POST',
-    url: '/umbraco/backofficeorganiser/api/organise',
-    body: data.requestBody,
-    mediaType: 'application/json'
-}); };
+export const postUmbracoBackofficeorganiserApiOrganise = (data: PostUmbracoBackofficeorganiserApiOrganiseData = {}): CancelablePromise<PostUmbracoBackofficeorganiserApiOrganiseResponse> => {
+    return __request(OpenAPI, {
+        method: 'POST',
+        url: '/umbraco/backofficeorganiser/api/organise',
+        body: data.requestBody,
+        mediaType: 'application/json'
+    });
+};

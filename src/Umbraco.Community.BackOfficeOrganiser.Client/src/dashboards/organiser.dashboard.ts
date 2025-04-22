@@ -189,7 +189,7 @@ export default class BackofficeOrganiser extends UmbElementMixin(LitElement) {
 
 		const response = await this.#backofficeOrganiserContext?.organise(request);
 		const data = response?.data;
-		const success = !data?.error ?? false;
+		const success = !data?.error || false;
 		const heading = success ? "Success" : "Error";
 		const color = success ? "positive" : "danger";
 		this.#notificationContext?.peek(color, {
