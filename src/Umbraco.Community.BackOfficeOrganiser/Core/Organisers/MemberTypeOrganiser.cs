@@ -26,8 +26,9 @@ public class MemberTypeOrganiser(
 
     protected override Task<IEnumerable<IMemberType>> GetAllAsync() => Task.FromResult<IEnumerable<IMemberType>>(memberTypeService.GetAll().ToList());
 
-    protected async override Task PostOrganiseAll()
+    protected override Task PostOrganiseAll()
     {
         memberTypeService.DeleteAllEmptyContainers();
+        return Task.CompletedTask;
     }
 }
