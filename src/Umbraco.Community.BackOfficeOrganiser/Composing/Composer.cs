@@ -36,6 +36,6 @@ public class Composer : IComposer
         builder.AddNotificationAsyncHandler<MemberTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
         builder.AddNotificationAsyncHandler<ContentTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
 
-        builder.Services.AddSingleton<IPackageManifestReader, BackOfficeOrganiserPackageManifestReader>();
+        builder.Services.AddSingleton<IPackageManifestReader, PackageManifestReader>();
     }
 }
