@@ -1,6 +1,7 @@
 // noinspection CssUnresolvedCustomProperty
 
-import {css, customElement, html, LitElement, property, state} from "lit-element";
+import {css, html, LitElement} from "lit";
+import {customElement, property, state} from 'lit/decorators.js';
 import {OrganiseType} from "./organise-type.ts";
 import {Toast} from "./toast.ts";
 
@@ -64,80 +65,80 @@ export default class BackofficeOrganiser extends LitElement {
 			const look = type.selected ? "primary" : "placeholder";
 			return html
 				`
-                    <uui-button @click="${() => this.toggleType(type)}" style="--uui-button-height: 200px" look="${look}">
-                        ${type.label}
-                    </uui-button>
+					<uui-button @click="${() => this.toggleType(type)}" style="--uui-button-height: 200px" look="${look}">
+						${type.label}
+					</uui-button>
 				`;
 		})
 
 		const disableButton = this.types.filter(x => x.selected).length === 0;
 		const form = html`
-            <uui-form>
-                <form id="backoffice-organiser-form" @submit=${this.onSubmit} name="backofficeOrganiserForm">
-                    <uui-form-layout-item>
-                        <uui-label slot="label" for="parent" required="">Select types</uui-label>
-                        <span slot="description">
+			<uui-form>
+				<form id="backoffice-organiser-form" @submit=${this.onSubmit} name="backofficeOrganiserForm">
+					<uui-form-layout-item>
+						<uui-label slot="label" for="parent" required="">Select types</uui-label>
+						<span slot="description">
 							Select the types to organise
 						</span>
-                        <div class="organise-type-container">
-                            ${organiseTypes}
-                        </div>
-                    </uui-form-layout-item>
-                    <uui-button type="submit" look="primary" label="Submit" .disabled="${disableButton}"></uui-button>
-                </form>
-            </uui-form>
+						<div class="organise-type-container">
+							${organiseTypes}
+						</div>
+					</uui-form-layout-item>
+					<uui-button type="submit" look="primary" label="Submit" .disabled="${disableButton}"></uui-button>
+				</form>
+			</uui-form>
 
-            <uui-toast-notification-container
-                    class="toast-container"
-                    id="toastContainer"
-                    auto-close="3000"
-                    bottom-up="">
-                ${toasts}
-            </uui-toast-notification-container>
-        `;
+			<uui-toast-notification-container
+				class="toast-container"
+				id="toastContainer"
+				auto-close="3000"
+				bottom-up="">
+				${toasts}
+			</uui-toast-notification-container>
+		`;
 		const loader = html`
 			<uui-loader-bar style="color: blue"></uui-loader-bar>
 		`;
 
 		return html`
-            <uui-box headline="Welcome">
-                <p>
-                    This dashboard is designed to help you organise your Document Types, Media Types, Member Types and Data Types.
-                </p>
-                <p>
-                    To get started, select at least one type to organise and click the submit button.
-                </p>
-                <uui-icon-registry-essential>
-                    <uui-button look="outline"
-                                href="https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/?tab=readme-ov-file#umbracocommunitybackofficeorganiser"
-                                target="_blank">
-                        <uui-icon name="document"></uui-icon>
-                        Documentation
-                    </uui-button>
+			<uui-box headline="Welcome">
+				<p>
+					This dashboard is designed to help you organise your Document Types, Media Types, Member Types and Data Types.
+				</p>
+				<p>
+					To get started, select at least one type to organise and click the submit button.
+				</p>
+				<uui-icon-registry-essential>
+					<uui-button look="outline"
+								href="https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/?tab=readme-ov-file#umbracocommunitybackofficeorganiser"
+								target="_blank">
+						<uui-icon name="document"></uui-icon>
+						Documentation
+					</uui-button>
 
-                    <uui-button look="outline"
-                                href="https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/issues/new?assignees=bug&template=bug.yml"
-                                target="_blank">
-                        <uui-icon name="alert"></uui-icon>
-                        Report a Bug
-                    </uui-button>
+					<uui-button look="outline"
+								href="https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/issues/new?assignees=bug&template=bug.yml"
+								target="_blank">
+						<uui-icon name="alert"></uui-icon>
+						Report a Bug
+					</uui-button>
 
-                    <uui-button look="outline"
-                                href="https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/issues/new?assignees=enhancement&template=feature_request.yml"
-                                target="_blank">
-                        <uui-icon name="wand"></uui-icon>
-                        Request a Feature
-                    </uui-button>
-                </uui-icon-registry-essential>
+					<uui-button look="outline"
+								href="https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/issues/new?assignees=enhancement&template=feature_request.yml"
+								target="_blank">
+						<uui-icon name="wand"></uui-icon>
+						Request a Feature
+					</uui-button>
+				</uui-icon-registry-essential>
 
-            </uui-box>
-            <br>
-            <uui-box headline="Organise">
-                ${this.loading ? loader : form}
-            </uui-box>
-            <uui-modal-container>
-                ${modal}
-            </uui-modal-container>
+			</uui-box>
+			<br>
+			<uui-box headline="Organise">
+				${this.loading ? loader : form}
+			</uui-box>
+			<uui-modal-container>
+				${modal}
+			</uui-modal-container>
 		`;
 	}
 
@@ -228,41 +229,41 @@ export default class BackofficeOrganiser extends LitElement {
 
 	static styles = [
 		css`
-          .organise-type-container uui-button {
-            width: 100%;
-          }
+			.organise-type-container uui-button {
+				width: 100%;
+			}
 
-          .toast-container {
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100vh;
-            padding: var(--uui-size-layout-1);
-          }
+			.toast-container {
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 100vh;
+				padding: var(--uui-size-layout-1);
+			}
 
-          .organise-type-container {
-            display: flex;
-            flex-direction: row;
-            gap: var(--uui-size-3);
-            max-width: 900px;
-          }
+			.organise-type-container {
+				display: flex;
+				flex-direction: row;
+				gap: var(--uui-size-3);
+				max-width: 900px;
+			}
 
-          .organise-type {
-            background-color: var(--uui-color-background);
-            cursor: pointer;
-            padding: var(--uui-size-6);
-          }
+			.organise-type {
+				background-color: var(--uui-color-background);
+				cursor: pointer;
+				padding: var(--uui-size-6);
+			}
 
-          .organise-type.active {
-            background-color: var(--uui-color-selected);
-            color: white;
-          }
+			.organise-type.active {
+				background-color: var(--uui-color-selected);
+				color: white;
+			}
 
-          .alert {
-            padding: var(--uui-size-3);
-            background-color: var(--uui-color-danger-emphasis);
-            color: var(--uui-color-danger-contrast);
-          }
+			.alert {
+				padding: var(--uui-size-3);
+				background-color: var(--uui-color-danger-emphasis);
+				color: var(--uui-color-danger-contrast);
+			}
 		`
 	]
 }
