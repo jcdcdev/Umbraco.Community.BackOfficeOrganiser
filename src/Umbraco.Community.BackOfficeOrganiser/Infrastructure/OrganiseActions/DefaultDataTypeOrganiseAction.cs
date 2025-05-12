@@ -98,10 +98,7 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
             Cms.Core.Constants.PropertyEditors.Aliases.TextArea => "Text",
             Cms.Core.Constants.PropertyEditors.Aliases.EmailAddress => "Text",
             Cms.Core.Constants.PropertyEditors.Aliases.Label => "Text",
-
-#pragma warning disable CS0618 // Type or member is obsolete
-            Cms.Core.Constants.PropertyEditors.Aliases.TinyMce => "Rich Text",
-#pragma warning restore CS0618 // Type or member is obsolete
+            
             Cms.Core.Constants.PropertyEditors.Aliases.RichText => "Rich Text",
             Cms.Core.Constants.PropertyEditors.Aliases.MarkdownEditor => "Rich Text",
 

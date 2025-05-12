@@ -3,7 +3,7 @@ import {UmbControllerHost} from "@umbraco-cms/backoffice/controller-api";
 import {UmbDataSourceResponse} from "@umbraco-cms/backoffice/repository";
 import {UmbContextToken} from "@umbraco-cms/backoffice/context-api";
 import {BackofficeOrganiserRepository} from "../repository/organsier.repository.ts";
-import {type GetUmbracoBackOfficeOrganiserApiV1InfoResponse, PostUmbracoBackOfficeOrganiserApiV1OrganiseData, PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse} from "../api";
+import {type GetUmbracoBackOfficeOrganiserApiV1InfoResponse, OrganiseRequest, PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse} from "../api";
 
 export class BackofficeOrganiserContext extends UmbControllerBase {
 	#repository: BackofficeOrganiserRepository;
@@ -14,7 +14,7 @@ export class BackofficeOrganiserContext extends UmbControllerBase {
 		this.#repository = new BackofficeOrganiserRepository(this);
 	}
 
-	async organise(data: PostUmbracoBackOfficeOrganiserApiV1OrganiseData = {}): Promise<UmbDataSourceResponse<PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse>> {
+	async organise(data: OrganiseRequest): Promise<UmbDataSourceResponse<PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse>> {
 		return await this.#repository.organise(data);
 	}
 

@@ -1,10 +1,10 @@
 import {UmbControllerHost} from "@umbraco-cms/backoffice/controller-api";
 import {UmbDataSourceResponse} from "@umbraco-cms/backoffice/repository";
-import {tryExecuteAndNotify} from "@umbraco-cms/backoffice/resources";
+import {tryExecute} from "@umbraco-cms/backoffice/resources";
 import {
-	getUmbracoBackOfficeOrganiserApiV1Info, type GetUmbracoBackOfficeOrganiserApiV1InfoResponse,
-	postUmbracoBackOfficeOrganiserApiV1Organise,
-	PostUmbracoBackOfficeOrganiserApiV1OrganiseData,
+	BackOfficeOrganiserService,
+	type GetUmbracoBackOfficeOrganiserApiV1InfoResponse,
+	OrganiseRequest,
 	PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse
 } from "../api";
 
@@ -16,17 +16,20 @@ export class BackofficeOrganiserDataSource implements IBackofficeOrganiserDataSo
 		this.#host = host;
 	}
 
-	async organise(data: PostUmbracoBackOfficeOrganiserApiV1OrganiseData = {}): Promise<UmbDataSourceResponse<PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse>> {
-		return await tryExecuteAndNotify(this.#host, postUmbracoBackOfficeOrganiserApiV1Organise(data))
+	async organise(data: OrganiseRequest): Promise<UmbDataSourceResponse<PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse>> {
+		const options = {
+			body: data,
+		};
+		return await tryExecute(this.#host, BackOfficeOrganiserService.postUmbracoBackOfficeOrganiserApiV1Organise(options))
 	}
 
 	async getInfo(): Promise<UmbDataSourceResponse<GetUmbracoBackOfficeOrganiserApiV1InfoResponse>> {
-		return await tryExecuteAndNotify(this.#host, getUmbracoBackOfficeOrganiserApiV1Info())
+		return await tryExecute(this.#host, BackOfficeOrganiserService.getUmbracoBackOfficeOrganiserApiV1Info())
 	}
 }
 
 export interface IBackofficeOrganiserDataSource {
-	organise(data: PostUmbracoBackOfficeOrganiserApiV1OrganiseData): Promise<UmbDataSourceResponse<PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse>>;
+	organise(data: OrganiseRequest): Promise<UmbDataSourceResponse<PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse>>;
 
 	getInfo(): Promise<UmbDataSourceResponse<GetUmbracoBackOfficeOrganiserApiV1InfoResponse>>;
 }

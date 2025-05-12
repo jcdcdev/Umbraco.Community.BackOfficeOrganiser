@@ -55,8 +55,8 @@ export default class BackofficeOrganiser extends UmbElementMixin(LitElement) {
 		super();
 		this.consumeContext(BACKOFFICE_ORGANISER_CONTEXT_TOKEN, async (context) => {
 			this.#backofficeOrganiserContext = context;
-			const data = await context.getInfo();
-			if (!data.error && data.data) {
+			const data = await context?.getInfo();
+			if (!data?.error && data?.data) {
 				this.info = data.data;
 			}
 		});
@@ -128,7 +128,7 @@ export default class BackofficeOrganiser extends UmbElementMixin(LitElement) {
 								color="info"
 								@click="${() => this._showInfoModal(type)}">
 								<uui-icon name="info"></uui-icon>
-								${count} ${this.localize.term("boo_numberOfOrganisers", count)}
+								${this.localize.term("boo_numberOfOrganisers", count)}
 							</uui-button>
 						</p>
 						<uui-button label="${label}" @click="${() => this._toggleType(type)}" look="${look}">
@@ -259,12 +259,10 @@ export default class BackofficeOrganiser extends UmbElementMixin(LitElement) {
 	_confirmOrganise = async () => {
 		this.loading = true;
 		const request = {
-			requestBody: {
-				contentTypes: this.contentTypes,
-				mediaTypes: this.mediaTypes,
-				memberTypes: this.memberTypes,
-				dataTypes: this.dataTypes
-			}
+			contentTypes: this.contentTypes,
+			mediaTypes: this.mediaTypes,
+			memberTypes: this.memberTypes,
+			dataTypes: this.dataTypes
 		};
 
 		const response = await this.#backofficeOrganiserContext?.organise(request);

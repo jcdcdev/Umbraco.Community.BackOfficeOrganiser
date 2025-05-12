@@ -4,20 +4,20 @@ export default defineConfig({
 	input: 'http://localhost:54813/umbraco/swagger/BackOfficeOrganiser/swagger.json',
 	plugins: [
 		...defaultPlugins,
-		'legacy/fetch',
-		'@hey-api/schemas',
 		{
-			dates: true,
-			name: '@hey-api/transformers',
+			name: '@hey-api/client-fetch',
+			exportFromIndex: true,
+			throwOnError: true,
 		},
 		{
-			enums: 'javascript',
 			name: '@hey-api/typescript',
+			enums: 'typescript',
+			readOnlyWriteOnlyBehavior: 'off',
 		},
 		{
 			name: '@hey-api/sdk',
-			transformer: true,
-		},
+			asClass: true,
+		}
 	],
 	output: {
 		format: 'prettier',
