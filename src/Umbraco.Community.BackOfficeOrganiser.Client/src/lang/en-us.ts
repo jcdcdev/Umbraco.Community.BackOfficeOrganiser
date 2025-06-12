@@ -4,9 +4,9 @@
 		disabled: "Disabled",
 		numberOfOrganisers: (count: any) => {
 			if ((parseInt(count) || 0) === 1) {
-				return "Organiser";
+				return `${count} Organiser`;
 			}
-			return "Organisers";
+			return `${count} Organisers`;
 		},
 		organise: "Organise",
 		contentTypes: "Content Types",
