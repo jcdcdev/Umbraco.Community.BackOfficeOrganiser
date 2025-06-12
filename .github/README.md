@@ -14,9 +14,6 @@ Is your Backoffice a bit untidy?
     - Member Types
     - Data Types
 
-> [!NOTE]
-> Version 16 is not released yet.
-
 ## Quick Start
 
 - Go to the backoffice
