@@ -1,8 +1,8 @@
-import {UmbControllerHost} from "@umbraco-cms/backoffice/controller-api";
-import {UmbDataSourceResponse} from "@umbraco-cms/backoffice/repository";
-import {tryExecute} from "@umbraco-cms/backoffice/resources";
+import { UmbControllerHost } from "@umbraco-cms/backoffice/controller-api";
+import { UmbDataSourceResponse } from "@umbraco-cms/backoffice/repository";
+import { tryExecute } from "@umbraco-cms/backoffice/resources";
 import {
-	BackOfficeOrganiserService,
+	BackOfficeOrganiser,
 	type GetUmbracoBackOfficeOrganiserApiV1InfoResponse,
 	OrganiseRequest,
 	PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse
@@ -20,11 +20,11 @@ export class BackofficeOrganiserDataSource implements IBackofficeOrganiserDataSo
 		const options = {
 			body: data,
 		};
-		return await tryExecute(this.#host, BackOfficeOrganiserService.postUmbracoBackOfficeOrganiserApiV1Organise(options))
+		return await tryExecute(this.#host, BackOfficeOrganiser.postUmbracoBackOfficeOrganiserApiV1Organise(options))
 	}
 
 	async getInfo(): Promise<UmbDataSourceResponse<GetUmbracoBackOfficeOrganiserApiV1InfoResponse>> {
-		return await tryExecute(this.#host, BackOfficeOrganiserService.getUmbracoBackOfficeOrganiserApiV1Info())
+		return await tryExecute(this.#host, BackOfficeOrganiser.getUmbracoBackOfficeOrganiserApiV1Info())
 	}
 }
 
