@@ -14,6 +14,11 @@ Is your Backoffice a bit untidy?
     - Member Types
     - Data Types
 
+> [!IMPORTANT]
+> Version 15 will only receive security updates and no new features.
+
+> Please review the [security policy](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser?tab=security-ov-file#supported-versions) for more information.
+
 ## Quick Start
 
 - Go to the backoffice
