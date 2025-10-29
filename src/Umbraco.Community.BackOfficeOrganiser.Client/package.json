@@ -12,9 +12,9 @@
 		"lit": "^3.3.1"
 	},
 	"devDependencies": {
-		"@umbraco-ui/uui": "^1.15.0",
-		"typescript": "^5.9.2",
-		"vite": "^7.1.5"
+		"@umbraco-ui/uui": "^1.16.0",
+		"typescript": "^5.9.3",
+		"vite": "^7.1.11"
 	},
 	"volta": {
 		"node": "22.12.0"
