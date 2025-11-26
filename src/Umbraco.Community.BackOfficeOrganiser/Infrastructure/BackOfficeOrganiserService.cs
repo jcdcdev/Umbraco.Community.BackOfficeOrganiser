@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core;
-using Umbraco.Community.BackOfficeOrganiser.Core;
 using Umbraco.Community.BackOfficeOrganiser.Core.Models;
 using Umbraco.Community.BackOfficeOrganiser.Core.OrganiseActions;
 using Umbraco.Community.BackOfficeOrganiser.Core.Organisers;
