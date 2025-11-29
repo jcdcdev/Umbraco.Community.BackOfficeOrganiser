@@ -1,5 +1,3 @@
-using Umbraco.Community.BackOfficeOrganiser.Core.OrganiseActions;
-
 namespace Umbraco.Community.BackOfficeOrganiser.Web.Models;
 
 public class OrganiseInfoResponse
