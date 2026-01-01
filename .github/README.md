@@ -19,7 +19,6 @@ Is your Backoffice a bit untidy?
 
 > Please review the [security policy](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser?tab=security-ov-file#supported-versions) for more information.
 
-
 ## Quick Start
 
 - Go to the backoffice
