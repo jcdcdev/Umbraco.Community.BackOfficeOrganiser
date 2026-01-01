@@ -15,6 +15,14 @@ Is your Backoffice a bit untidy?
     - Member Types
     - Data Types
 
+## Installation
+
+### Install Package
+
+```csharp
+dotnet add package Umbraco.Community.BackOfficeOrganiser
+```
+
 ## Quick Start
 
 - Go to the backoffice
