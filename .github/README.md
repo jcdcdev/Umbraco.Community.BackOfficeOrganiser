@@ -19,6 +19,14 @@ Is your Backoffice a bit untidy?
 
 > Please review the [security policy](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser?tab=security-ov-file#supported-versions) for more information.
 
+## Installation
+
+### Install Package
+
+```csharp
+dotnet add package Umbraco.Community.BackOfficeOrganiser
+```
+
 ## Quick Start
 
 - Go to the backoffice
