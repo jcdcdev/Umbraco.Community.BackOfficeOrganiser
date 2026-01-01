@@ -15,7 +15,6 @@ Is your Backoffice a bit untidy?
     - Member Types
     - Data Types
 
-
 ## Quick Start
 
 - Go to the backoffice
