@@ -18,7 +18,7 @@ Is your Backoffice a bit untidy?
 
 ### Install Package
 
-```csharp
+```powershell
 dotnet add package Umbraco.Community.BackOfficeOrganiser
 ```
 
