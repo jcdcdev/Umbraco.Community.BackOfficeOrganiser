@@ -1,5 +1,6 @@
-# Umbraco.Community.BackOfficeOrganiser
+# Back Office Organiser
 
+[![Documentation](https://img.shields.io/badge/Documentation-123?color=394933&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjb2xvcj0id2hpdGUiIGNsYXNzPSJiaSBiaS1ib29rIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik0xIDIuODI4Yy44ODUtLjM3IDIuMTU0LS43NjkgMy4zODgtLjg5MyAxLjMzLS4xMzQgMi40NTguMDYzIDMuMTEyLjc1MnY5Ljc0NmMtLjkzNS0uNTMtMi4xMi0uNjAzLTMuMjEzLS40OTMtMS4xOC4xMi0yLjM3LjQ2MS0zLjI4Ny44MTF6bTcuNS0uMTQxYy42NTQtLjY4OSAxLjc4Mi0uODg2IDMuMTEyLS43NTIgMS4yMzQuMTI0IDIuNTAzLjUyMyAzLjM4OC44OTN2OS45MjNjLS45MTgtLjM1LTIuMTA3LS42OTItMy4yODctLjgxLTEuMDk0LS4xMTEtMi4yNzgtLjAzOS0zLjIxMy40OTJ6TTggMS43ODNDNy4wMTUuOTM2IDUuNTg3LjgxIDQuMjg3Ljk0Yy0xLjUxNC4xNTMtMy4wNDIuNjcyLTMuOTk0IDEuMTA1QS41LjUgMCAwIDAgMCAyLjV2MTFhLjUuNSAwIDAgMCAuNzA3LjQ1NWMuODgyLS40IDIuMzAzLS44ODEgMy42OC0xLjAyIDEuNDA5LS4xNDIgMi41OS4wODcgMy4yMjMuODc3YS41LjUgMCAwIDAgLjc4IDBjLjYzMy0uNzkgMS44MTQtMS4wMTkgMy4yMjItLjg3NyAxLjM3OC4xMzkgMi44LjYyIDMuNjgxIDEuMDJBLjUuNSAwIDAgMCAxNiAxMy41di0xMWEuNS41IDAgMCAwLS4yOTMtLjQ1NWMtLjk1Mi0uNDMzLTIuNDgtLjk1Mi0zLjk5NC0xLjEwNUMxMC40MTMuODA5IDguOTg1LjkzNiA4IDEuNzgzIi8+Cjwvc3ZnPg==)](https://docs.jcdc.dev/umbraco-community-backofficeorganiser/latest)
 [![Umbraco Marketplace](https://img.shields.io/badge/Umbraco%20Marketplace-%23f5c1bc?logo=umbraco&logoColor=162335)](https://marketplace.umbraco.com/package/Umbraco.Community.BackOfficeOrganiser)
 [![GitHub](https://img.shields.io/badge/GitHub-1?logo=github&color=232925)](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Umbraco.Community.BackOfficeOrganiser?labelColor=4536d3&color=4536d3&label=NuGet&logo=nuget)](https://www.nuget.org/packages/Umbraco.Community.BackOfficeOrganiser)
@@ -22,15 +23,6 @@ Is your Backoffice a bit untidy?
 dotnet add package Umbraco.Community.BackOfficeOrganiser
 ```
 
-## Quick Start
-
-- Go to the backoffice
-- Click `Settings`
-- Click `Organise`
-- Select the types you wish to organise
-- Click submit and confirm
-- Refresh your page and enjoy a cleaner backoffice ✨
-
 ## Configuration
 
 Add the following to your `appsettings.json` file
@@ -45,71 +37,21 @@ Add the following to your `appsettings.json` file
 	}
 ```
 
-## Extending
+## Security
 
-You can implement your own `Organise Action`, a method that determines where a type should be moved to. Implement the following interfaces:
+> [!NOTE]
+> This project takes security and support seriously.
+> Please visit the [Security](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser?tab=security-ov-file) page for more information.
 
-- `Document Types` => `IContentTypeOrganiseAction`
-- `Media Types` => `IMediaTypeOrganiseAction`
-- `Member Types` => `IMemberTypeOrganiseAction`
-- `Data Types` => `IDataTypeOrganiseAction`
 
-### Example
-```csharp title="ExampleContentTypeOrganiseAction.cs"
-using jcdcdev.Umbraco.Core.Extensions;
-using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.Services;
-
-namespace Umbraco.Community.BackOfficeOrganiser.Organisers.ContentTypes;
-
-public class ExampleContentTypeOrganiseAction : IContentTypeOrganiseAction
-{
-    // Handle all but container types (Folders)
-    public bool CanMove(IContentType contentType, IContentTypeService contentTypeService) => !contentType.IsContainer;
-
-    public void Move(IContentType contentType, IContentTypeService contentTypeService)
-    {
-        var folderId = -1;
-        var folderName = string.Empty;
-        var isComposition = contentTypeService.GetComposedOf(contentType.Id).Any();
-
-        if (contentType.AllowedTemplates?.Any() ?? false)
-        {
-            folderName = "Pages";
-        }
-        else if (isComposition)
-        {
-            folderName = "Compositions";
-        }
-        else if (contentType.IsElement)
-        {
-            folderName = "Element Types";
-        }
-
-        if (!folderName.IsNullOrWhiteSpace())
-        {
-            folderId = contentTypeService.GetOrCreateFolder(folderName).Id;
-        }
-
-        contentTypeService.Move(contentType, folderId);
-    }
-}
-
-public class Composer : IComposer
-{
-    public void Compose(IUmbracoBuilder builder)
-    {
-        // Make sure you register your action BEFORE the default!
-        builder.ContentTypeOrganiseActions().Insert<ExampleContentTypeOrganiseAction>();
-    }
-}
-```
 
 ## Contributing
 
 Contributions to this package are most welcome! Please visit the [Contributing](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser/contribute) page.
 
-## Acknowledgements (Thanks)
+## Acknowledgements
+
+Thank you to the following projects and individuals for their contributions. High five, you rock! 🤘🦄
 
 - LottePitcher  - [opinionated-package-starter](https://github.com/LottePitcher/opinionated-package-starter)
 
