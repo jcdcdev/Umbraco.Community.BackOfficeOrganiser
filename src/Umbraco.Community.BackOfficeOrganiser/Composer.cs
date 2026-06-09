@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using Umbraco.Cms.Api.Common.OpenApi;
+using Umbraco.Cms.Api.Management.OpenApi;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
 using Umbraco.Cms.Core.Notifications;
@@ -37,6 +39,8 @@ public class Composer : IComposer
         builder.AddNotificationAsyncHandler<MediaTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
         builder.AddNotificationAsyncHandler<MemberTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
         builder.AddNotificationAsyncHandler<ContentTypeSavedNotification, BackofficeOrganiserNotificationHandler>();
-        builder.Services.ConfigureOptions<ConfigApiSwaggerGenOptions>();
-    }
+        
+        builder.AddBackOfficeOpenApiDocument(Constants.Api.ApiName, document => document
+            .WithTitle(Constants.Api.Title)
+            .WithBackOfficeAuthentication());    }
 }

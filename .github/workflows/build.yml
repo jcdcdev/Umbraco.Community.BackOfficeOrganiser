@@ -7,10 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build
-        uses: jcdcdev/jcdcdev.Umbraco.GitHub.Build@v17
+        uses: jcdcdev/jcdcdev.Umbraco.GitHub.Build@v18
         with:
           project-name: Umbraco.Community.BackOfficeOrganiser
           project-path: src/Umbraco.Community.BackOfficeOrganiser/Umbraco.Community.BackOfficeOrganiser.csproj
           npm-working-dir: src/Umbraco.Community.BackOfficeOrganiser.Client
           npm-enabled: true
-          npm-version: "22.x"
