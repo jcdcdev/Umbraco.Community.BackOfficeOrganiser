@@ -15,32 +15,10 @@ Is your Backoffice a bit untidy?
     - Member Types
     - Data Types
 
-> [!IMPORTANT]
-> Version 16 will only receive security updates and no new features.
+> [!WARNING]
+> Version 16 is no longer supported and is End of Life (EOL).
 
 > Please review the [security policy](https://github.com/jcdcdev/Umbraco.Community.BackOfficeOrganiser?tab=security-ov-file#supported-versions) for more information.
-
-## Installation
-
-### Install Package
-
-```powershell
-dotnet add package Umbraco.Community.BackOfficeOrganiser
-```
-
-## Configuration
-
-Add the following to your `appsettings.json` file
-
-```json title="appsettings.json"
-	"BackOfficeOrganiser": {
-		"DataTypes": {
-			"InternalFolderName": "Internal",
-			"ThirdPartyFolderName": "Third Party",
-			"CustomFolderName": "Custom"
-		}
-	}
-```
 
 ## Security
 
