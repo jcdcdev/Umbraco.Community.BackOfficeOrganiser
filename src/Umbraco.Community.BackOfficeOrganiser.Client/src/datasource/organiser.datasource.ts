@@ -1,11 +1,11 @@
-import { UmbControllerHost } from "@umbraco-cms/backoffice/controller-api";
-import { UmbDataSourceResponse } from "@umbraco-cms/backoffice/repository";
-import { tryExecute } from "@umbraco-cms/backoffice/resources";
+import {UmbControllerHost} from "@umbraco-cms/backoffice/controller-api";
+import {UmbDataSourceResponse} from "@umbraco-cms/backoffice/repository";
+import {tryExecute} from "@umbraco-cms/backoffice/resources";
 import {
 	BackOfficeOrganiser,
-	type GetUmbracoBackOfficeOrganiserApiV1InfoResponse,
+	OrganiseInfoResponse,
 	OrganiseRequest,
-	PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse
+	OrganiseResponse,
 } from "../api";
 
 export class BackofficeOrganiserDataSource implements IBackofficeOrganiserDataSource {
@@ -16,21 +16,21 @@ export class BackofficeOrganiserDataSource implements IBackofficeOrganiserDataSo
 		this.#host = host;
 	}
 
-	async organise(data: OrganiseRequest): Promise<UmbDataSourceResponse<PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse>> {
+	async organise(data: OrganiseRequest): Promise<UmbDataSourceResponse<OrganiseResponse>> {
 		const options = {
 			body: data,
 		};
-		return await tryExecute(this.#host, BackOfficeOrganiser.postUmbracoBackOfficeOrganiserApiV1Organise(options))
+		return await tryExecute(this.#host, BackOfficeOrganiser.postOrganise(options))
 	}
 
-	async getInfo(): Promise<UmbDataSourceResponse<GetUmbracoBackOfficeOrganiserApiV1InfoResponse>> {
-		return await tryExecute(this.#host, BackOfficeOrganiser.getUmbracoBackOfficeOrganiserApiV1Info())
+	async getInfo(): Promise<UmbDataSourceResponse<OrganiseInfoResponse>> {
+		return await tryExecute(this.#host, BackOfficeOrganiser.getInfo())
 	}
 }
 
 export interface IBackofficeOrganiserDataSource {
-	organise(data: OrganiseRequest): Promise<UmbDataSourceResponse<PostUmbracoBackOfficeOrganiserApiV1OrganiseResponse>>;
+	organise(data: OrganiseRequest): Promise<UmbDataSourceResponse<OrganiseResponse>>;
 
-	getInfo(): Promise<UmbDataSourceResponse<GetUmbracoBackOfficeOrganiserApiV1InfoResponse>>;
+	getInfo(): Promise<UmbDataSourceResponse<OrganiseInfoResponse>>;
 }
 
