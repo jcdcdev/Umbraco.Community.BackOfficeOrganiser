@@ -41,7 +41,7 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
             return;
         }
 
-        var dataTypeFolder = await dataTypeContainerService.GetOrCreateFolderAsync(folder, parentFolder.Id);
+        var dataTypeFolder = await dataTypeContainerService.GetOrCreateFolderAsync(folder, parentFolder.Id, parentFolder.Key);
         await dataTypeService.MoveAsync(dataType, dataTypeFolder.Key, Cms.Core.Constants.Security.SuperUserKey);
     }
 
@@ -56,6 +56,7 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
         var folder = dataType.EditorAlias switch
         {
             Cms.Core.Constants.PropertyEditors.Aliases.BlockList => "Block List",
+            Cms.Core.Constants.PropertyEditors.Aliases.SingleBlock => "Block List",
 
             Cms.Core.Constants.PropertyEditors.Aliases.NestedContent => "Nested Content",
 
@@ -78,6 +79,7 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
             Cms.Core.Constants.PropertyEditors.Aliases.ColorPickerEyeDropper => "Picker",
             Cms.Core.Constants.PropertyEditors.Aliases.ColorPicker => "Picker",
             Cms.Core.Constants.PropertyEditors.Aliases.ContentPicker => "Picker",
+            Cms.Core.Constants.PropertyEditors.Aliases.EntityDataPicker => "Picker",
             Cms.Core.Constants.PropertyEditors.Aliases.MultipleMediaPicker => "Picker",
             Cms.Core.Constants.PropertyEditors.Aliases.MemberPicker => "Picker",
             Cms.Core.Constants.PropertyEditors.Aliases.MemberGroupPicker => "Picker",
@@ -92,6 +94,10 @@ public class DefaultDataTypeOrganiseAction(IOptions<BackOfficeOrganiserOptions> 
             Cms.Core.Constants.PropertyEditors.Aliases.Integer => "Number",
 
             Cms.Core.Constants.PropertyEditors.Aliases.DateTime => "Date",
+            Cms.Core.Constants.PropertyEditors.Aliases.DateOnly => "Date",
+            Cms.Core.Constants.PropertyEditors.Aliases.DateTimeUnspecified => "Date",
+            Cms.Core.Constants.PropertyEditors.Aliases.DateTimeWithTimeZone => "Date",
+            Cms.Core.Constants.PropertyEditors.Aliases.PlainDateTime => "Date",
 
             Cms.Core.Constants.PropertyEditors.Aliases.MultipleTextstring => "Text",
             Cms.Core.Constants.PropertyEditors.Aliases.TextBox => "Text",
