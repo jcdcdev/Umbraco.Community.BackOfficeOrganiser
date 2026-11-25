@@ -10,6 +10,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write
     steps:
       - name: Build
         id: build
@@ -20,10 +21,15 @@ jobs:
           npm-working-dir: src/Umbraco.Community.BackOfficeOrganiser.Client
           npm-enabled: true
           npm-version: "22.x"
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
       - name: Release
         uses: jcdcdev/jcdcdev.Umbraco.GitHub.Release@v17
         with:
           artifact-name: ${{ steps.build.outputs.artifact-name }}
           version: ${{ steps.build.outputs.version }}
-          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+          nuget-api-key: ${{steps.login.outputs.NUGET_API_KEY}}
           github-token: ${{ secrets.GITHUB_TOKEN }}
